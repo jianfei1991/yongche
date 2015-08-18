@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>合作伙伴管理系统</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="common.css">
+	<style>
+	</style>
+</head>
+<body>
+	<div class="head">
+		<div class="headCon">
+			<div class="logo"></div>
+			<div class="title">合作伙伴管理系统</div>	
+			<ul class="message clearfix right">
+				<li class="left">北京某公司</li>
+				<li class="left back">退出登录</li>
+				<li class="left back">修改密码</li>
+			</ul>
+		</div>
+	</div>
+	<div id="con" class="con">
+		<table class="table table-bordered">
+			<caption class="conTitle clearfix">
+				<div class="left">司机详情</div>
+			</caption>
+			<tr>
+				<th>司机姓名</th>
+				<td>张三</td>
+				<th>性别</th>
+				<td>男</td>
+				<th>年龄</th>
+				<td>40</td>
+			</tr>
+			<tr>
+				<th>身份证号</th>
+				<td>123456789123456789</td>
+				<th>手机号</th>
+				<td>13812345678</td>
+				<th>备用电话</th>
+				<td>13912345678</td>
+			</tr>
+			<tr>
+				<th>司机姓名</th>
+				<td>张三</td>
+				<th>性别</th>
+				<td>男</td>
+				<th>年龄</th>
+				<td>40</td>
+			</tr>
+		</table>
+	</div>
+	<div id="foot" class="foot">2015 ◎北京东方车云信息技术有限公司 YongChe.com</div>
+	<script>
+	window.onload = function(){
+		console.log(document.getElementById("con").offsetHeight)
+		console.log(document.body.scrollHeight)
+		if(document.body.scrollHeight>471){
+			document.getElementById("foot").style.marginTop = document.body.scrollHeight-190-document.getElementById("con").offsetHeight+"px"
+		}
+	}
+	</script>
+</body>
+</html>
