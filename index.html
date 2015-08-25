@@ -3,10 +3,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>GTD</title>
+	<style>
+		#message{width:400px;height:200px;border:solid red 1px;}
+	</style>
+	<script>
+	function id(obj){
+		return document.getElementById(obj)
+	}
+	var inp = "<input type='text'/>"
+	window.onload = function(){
+		id("startTime").onclick=function(){
+			var time=new Date();
+			var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+			id("message").innerHTML=t+inp;//bug		innerHTML不包括内存中数据
+			this.onclick = null;
+		}
+		id("mid").onclick=function(){
+			var time=new Date();
+			var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+			id("message").innerHTML=id("message").innerHTML+"<br>"+t+inp;
+		}
+	}
+	</script>
 </head>
 <body>
+<div id="message">
+	<div>23:04:11 <input type="text"></div>
+</div>
+<br>
+<br>
+<input id="startTime" type="button" value="开始计时"/>
+<br>
+<br>
+<input id="mid" type="button" value="中间计时"/>
+<br>
+<br>
+<input id="endTime" type="button" value="结束计时"/>
 
-<input type="button" value="开始计时"/>
 	
 </body>
 </html>
