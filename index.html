@@ -31,9 +31,22 @@
 		// var time
 		// var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
 	$(function(){
+		var n = 0;
 		$("#startTime").click(function() {
+			n++
+			if(n==1){
+				var $time  = new Date();
+				var $input = $("<span>"+$time+"开始</span><input type='text'><br>")
+			}else{
+				var $time  = new Date();
+				var $input = $("<span>"+$time+"</span><input type='text'><br>")
+			}
+			$("#message").append($input)
+		});
+		$("#endTime").click(function() {
 			var $time  = new Date();
-			var $input = $("<span>"+$time+"</span><input type='text'><br>")
+			var $input = $("<span>"+$time+"结束</span><input type='text'><br>")
+			
 			$("#message").append($input)
 		});
 		
