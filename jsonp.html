@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonP</title>
+	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+	<script>
+		// $.ajax({
+		// 	type : "post",
+  //           url : "b.txt",
+		// 	success :function(a){
+		// 		console.log(a)
+		// 	},
+		// 	error:function(){
+		// 		console.log("error")
+		// 	}
+
+		// })
+
+	</script>
+
+	<script>
+	function ajax(options){
+		var type = options.type || "POST";
+		var url = options.url;
+		var succeed = options.succeed
+		if (window.ActiveXObject) { 
+			var oAjax = new ActiveXObject("Microsoft.XMLHTTP"); 
+		} else if (window.XMLHttpRequest) { 
+			var oAjax =new XMLHttpRequest(); 
+		}
+		oAjax.open(type,url); 
+		oAjax.send(); 
+		oAjax.onreadystatechange = function(){
+			if(oAjax.readyState==4&&oAjax.status==200){
+				succeed(oAjax.responseText)
+			}			
+		}
+	}
+
+	function choose(value,db){
+		for(name in db){
+			if(value==name){
+				console.log(db[name])
+			}
+		}
+	}
+
+	
+		
+	$(function(){
+		$("#text").keyup(function(){
+			var val = this.value
+			ajax({url:"a.txt",succeed:function(a){
+				var $a =  $.parseJSON(a);
+				// console.log($a.subway)
+				choose(val,$a.subway)
+			}})
+
+		})
+	})
+
+	</script>
+</head>
+<body>
+	<input id="text" type="text">
+</body>
+</html>
