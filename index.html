@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>GTD</title>
-	<style>
-		#message{width:400px;height:200px;border:solid red 1px;}
-	</style>
-	<script>
-	function id(obj){
-		return document.getElementById(obj)
-	}
-	var inp = "<input type='text'/>"
-	window.onload = function(){
-		id("startTime").onclick=function(){
-			var time=new Date();
-			var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
-			id("message").innerHTML=t+inp;//bug		innerHTML不包括内存中数据
-			this.onclick = null;
-		}
-		id("mid").onclick=function(){
-			var time=new Date();
-			var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
-			id("message").innerHTML=id("message").innerHTML+"<br>"+t+inp;
-		}
-	}
-	</script>
+<meta charset="UTF-8">
+<title>GTD</title>
+<style>
+	#message{width:600px;height:200px;border:solid red 1px;}
+</style>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script>
+	// function id(obj){
+	// 	return document.getElementById(obj)
+	// }
+
+	// var inp = "<input type='text'/>"
+	// window.onload = function(){
+	// 	id("startTime").onclick=function(){
+	// 		var time=new Date();
+	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	// 		id("message").innerHTML=t+inp;//bug		innerHTML不包括内存中数据
+	// 		this.onclick = null;
+	// 	}
+	// 	id("mid").onclick=function(){
+	// 		var time=new Date();
+	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	// 		id("message").innerHTML=id("message").innerHTML+"<br>"+t+inp;
+	// 	}
+	// }
+</script>
+<script>
+		// var time
+		// var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	$(function(){
+		$("#startTime").click(function() {
+			var $time  = new Date();
+			var $input = $("<span>"+$time+"</span><input type='text'><br>")
+			$("#message").append($input)
+		});
+		
+	})
+</script>
 </head>
 <body>
 <div id="message">
