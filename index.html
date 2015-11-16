@@ -4,55 +4,37 @@
 <meta charset="UTF-8">
 <title>GTD</title>
 <style>
-	#message{width:600px;height:200px;border:solid red 1px;}
 </style>
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <script>
-	// function id(obj){
-	// 	return document.getElementById(obj)
-	// }
-
-	// var inp = "<input type='text'/>"
-	// window.onload = function(){
-	// 	id("startTime").onclick=function(){
-	// 		var time=new Date();
-	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
-	// 		id("message").innerHTML=t+inp;//bug		innerHTML不包括内存中数据
-	// 		this.onclick = null;
-	// 	}
-	// 	id("mid").onclick=function(){
-	// 		var time=new Date();
-	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
-	// 		id("message").innerHTML=id("message").innerHTML+"<br>"+t+inp;
-	// 	}
-	// }
-</script>
-<script>
-		// var time
-		// var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
-	$(function(){
-		$("#startTime").click(function() {
-			var $time  = new Date();
-			var $input = $("<span>"+$time+"</span><input type='text'><br>")
-			$("#message").append($input)
-		});
-		
-	})
+	$("div.header").Nav({
+     /**主菜单选项**/
+     number : 5,        //主菜单数量
+     NavText : ['首页','简介','我的信息','我的博客','关注'],        //主菜单名参数
+     NavHref : ['?m1','?m2','?m3','?m4'],        //主菜单链接,务必和菜单选项保持一致
+     NavWidth : 100,        //主菜单宽度
+     /**子菜单选项**/
+     sonNav : true,        //是否设置子菜单
+     sonText : {        //子菜单参数
+         首页 : ['首页一','首页二','首页三'],
+         简介 : ['sonmenu2','sonmenu2'],
+         我的信息 : ['sonmenu5','sonmenu5','sonmenu5','sonmenu5'],
+         我的博客 : ['sonmenu4'],
+         关注 : ['sonmenu3','sonmenu3','sonmenu3','sonmenu3']
+     },
+     sonNavHref : {        //子菜单链接,务必和菜单选项保持一致
+         首页 : ['?1'],
+         简介 : ['?2'],
+         我的信息 : ['?3'],
+         我的博客 : ['?4'],
+         关注 : ['?5']
+     },        
+     sonNavWidth : 100        //子菜单宽度
+ });
 </script>
 </head>
 <body>
-<div id="message">
-	<div>23:04:11 <input type="text"></div>
-</div>
-<br>
-<br>
-<input id="startTime" type="button" value="开始计时"/>
-<br>
-<br>
-<input id="mid" type="button" value="中间计时"/>
-<br>
-<br>
-<input id="endTime" type="button" value="结束计时"/>
+
 
 	
 </body>
