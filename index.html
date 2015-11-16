@@ -7,6 +7,7 @@
 </style>
 <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
 <script>
+<<<<<<< HEAD
 	$("div.header").Nav({
      /**主菜单选项**/
      number : 5,        //主菜单数量
@@ -31,6 +32,51 @@
      },        
      sonNavWidth : 100        //子菜单宽度
  });
+=======
+	// function id(obj){
+	// 	return document.getElementById(obj)
+	// }
+
+	// var inp = "<input type='text'/>"
+	// window.onload = function(){
+	// 	id("startTime").onclick=function(){
+	// 		var time=new Date();
+	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	// 		id("message").innerHTML=t+inp;//bug		innerHTML不包括内存中数据
+	// 		this.onclick = null;
+	// 	}
+	// 	id("mid").onclick=function(){
+	// 		var time=new Date();
+	// 		var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	// 		id("message").innerHTML=id("message").innerHTML+"<br>"+t+inp;
+	// 	}
+	// }
+</script>
+<script>
+		// var time
+		// var t=time.getHours()+":"+time.getMinutes()+":"+time.getSeconds()
+	$(function(){
+		var n = 0;
+		$("#startTime").click(function() {
+			n++
+			if(n==1){
+				var $time  = new Date();
+				var $input = $("<span>"+$time+"开始</span><input type='text'><br>")
+			}else{
+				var $time  = new Date();
+				var $input = $("<span>"+$time+"</span><input type='text'><br>")
+			}
+			$("#message").append($input)
+		});
+		$("#endTime").click(function() {
+			var $time  = new Date();
+			var $input = $("<span>"+$time+"结束</span><input type='text'><br>")
+			
+			$("#message").append($input)
+		});
+		
+	})
+>>>>>>> 1f93f573877b34626327fc5e5f35aa9437d31c99
 </script>
 </head>
 <body>
