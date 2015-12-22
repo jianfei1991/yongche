@@ -86,3 +86,16 @@ function check(id){
     console.log($id_last);
 }
 check("362226199001102113");
+
+
+function addLoadEvent(func) { // 解决多个window.onload问题 
+  var oldonload = window.onload; 
+  if (typeof window.onload != 'function') { 
+   window.onload = func; 
+  } else { 
+    window.onload = function() { 
+      oldonload(); 
+      func(); 
+     } 
+  } 
+} 
