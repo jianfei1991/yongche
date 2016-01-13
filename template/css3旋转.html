@@ -1,0 +1,21 @@
+<script>
+
+    function setStyle3(obj,name,value){
+      var str=name.charAt(0).toUpperCase()+name.substring(1);
+      //obj.style.Webkit+name='rotate(45deg)';
+      obj.style['Webkit'+str]=value;
+      obj.style['Moz'+str]=value;
+      obj.style['O'+str]=value;
+      obj.style['ms'+str]=value;
+      obj.style[name]=value;
+    }
+    
+	    window.onload = function(){//转圈动画效果
+      var oCircle = document.getElementById("circle");
+      var i=0;
+      setInterval(function(){
+        i+=1;
+        setStyle3(oCircle,'transform','rotate('+i+'deg)');
+      },30);
+    }
+</script>

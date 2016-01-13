@@ -1,0 +1,11 @@
+
+    <a href="yongche://neworder?type=asap" id="appointment"></a>
+
+    <script>
+			if (navigator.userAgent.indexOf( 'MicroMessenger' ) >= 0){
+			 document.addEventListener( 'WeixinJSBridgeReady' ,  function () {
+			   //WeixinJSBridge.call('hideToolbar');
+			 });
+			 document.getElementById("appointment").href="http://m.yongche.com";//
+			}
+    </script>

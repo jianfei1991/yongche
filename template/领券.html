@@ -1,0 +1,93 @@
+<script>
+$(function(){
+	var isApp = false;
+	if(navigator.userAgent.indexOf("YongChe")!=-1){//如果是app
+		isApp = true;
+	}
+
+	$("#getCoupons").click(function() {//领券11111111
+		var _params = {
+			username:$("#userName").val(),
+			isagreecontact: isAgree,  // tongyi shi 1 
+			source :  1
+		}
+		if(_params.username == null || _params.username == 0){
+			alert("请输入姓名");
+			return false;
+		}
+		if(isApp){
+				
+				
+		} else {
+				var _params = {
+					cellphone:$("#cellPhone").val(),//app内注释此行
+					username:$("#userName").val(),
+					isagreecontact: isAgree,  // tongyi shi 1 
+					source :  1
+				}
+
+				if(_params.username == null || _params.username == 0){
+					alert("请输入姓名");
+					return false;
+				}
+			  if(!/^((1[35678]{1})+\d{9})$/.test(_params.cellphone)){
+			  	alert("请输入正确的手机号");
+			  	return false;
+			  }
+		}
+
+		console.log(isAgree)
+
+
+		$.ajax({
+			url: 'http://market.yongche.com/miscellaneous/toyota/dosave',
+			type: 'get',
+			dataType: 'jsonp',
+			data:_params,
+			success:function(j){
+					console.log(j.code)
+					if(j.msg=="success"){
+						alert("恭喜您！领取成功！")
+					}else if(j.msg=="已经领取过了"){
+						alert("已经领取过了")
+					}else{
+						alert(j.msg)						
+					}
+			},
+			error:function(j){
+				alert(j.code+"!!!"+j.msg)
+			}
+
+		});
+	})
+
+
+
+
+
+	$("#lingquan").click(function() {//领券22222222222        自动化
+
+		if((/^((1[35678]{1})+\d{9})$/.test($("#phoneNumber").val()))){
+			$.ajax({
+	  		url: 'http://market.yongche.com/activity/api/aftertakePartin',
+	  		type: 'GET',
+	  		dataType: "jsonp",
+	  		// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+	  		data: {key: 'k6nut2120kg0g0ks', issendto: 'cellphone', cellphone: $("#phoneNumber").val()},
+	  		success: function(json){
+	  			console.log(json)
+	  			alert(json.msg)
+	  		},
+	  		error: function(msg){
+	  			console.log(msg)
+	  			alert(msg)
+	  		}
+	  	})
+		}else{
+	  	alert('请输入正确的手机号')
+	  }	
+
+	});//end of 领券2
+});
+
+</script>

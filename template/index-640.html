@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta content="yes" name=" apple-mobile-web-app-capable" />
+  <meta http-equiv="pragma" content="no-cache" />
+<title></title>
+<script type= "text/javascript" >
+// alert(window.screen.width)
+if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
+  var  version = parseFloat(RegExp.$1);
+  if (version>2.3){
+    var  phoneScale = parseInt(window.screen.width)/640;
+    document.write( '<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">' );
+  } else {
+    document.write( '<meta name="viewport" content="width=640, target-densitydpi=device-dpi">' );
+  }
+} else {
+  document.write( '<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">' );
+}
+if (navigator.userAgent.indexOf( 'MicroMessenger' ) >= 0){//微信去掉下方刷新栏
+  document.addEventListener( 'WeixinJSBridgeReady' ,  function () {
+    //WeixinJSBridge.call('hideToolbar');
+  });
+}
+String.prototype.isPhone = function(){
+  return /^((1[3578]{1})+\d{9})$/.test(this);
+};
+</script> 
+<{block:zyx/hd.tpl}>
+<!-- 提示，安装时请将GA代码和百度统计代码同时安装，代码和规则如下：
+H5端：
+安装方法：</head>标签前 -->
+<!-- GA: -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-18761483-4', 'auto');  ga('send', 'pageview');
+</script>
+<!-- 百度统计： -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?24b50d3a9a73a0efd25feab8f04d313f";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<style>
+*{padding: 0; margin:0;list-style: none;}
+body{height:100%;background: black;}
+#wrap { width: 100%; overflow: hidden; position: relative; height: 100%; }
+.hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(<{asset:u/images/201505/963892759.png}>) no-repeat center bottom; background-size: 100% auto; }
+@-webkit-keyframes hint-move { 
+    0% { opacity: 0; bottom: 60px; }
+   70% { opacity: 1; bottom: 55px; }
+  100% { opacity: 0; bottom: 60px; }
+}
+#scrollContent { width: 100%; height: 100%; top: 0; left: 0; -webkit-transition: all 0.8s linear; }
+#scrollContent .content { width: 750px; height: 1206px; overflow: hidden; position: relative; float: left; }
+.c0 { background: url(<{asset:media/g1/M03/06/16/rBEAQ1Y8c0eIKeqFAARYL68SDvgAACiSANHBecABFhH985.png}>) no-repeat center 0; 
+      background-size: 100% auto;}
+.c1 { background: url(<{asset:media/g1/M04/06/16/rBEARFY8qySIFrDzAACyVx241_oAACiVwN9a9kAALJv585.jpg}>) no-repeat center 0; 
+      background-size: 100% auto;}
+</style>
+</head>
+<body>
+<img id="shareImg" src="" style="position:fixed;left:-100%;" />
+<div id="wrap">
+  <div id="scrollContent">
+    <section class="content c0" id="c0">
+      <img id="circle" class="luner" src="<{asset:media/g1/M02/06/16/rBEARFY8dGqIbkATAAAyUctvfO8AACiSQMSU6AAADJp699.png}>" alt="">
+      <img id="circle2" class="luner2" src="<{asset:media/g1/M02/06/16/rBEARFY8dGqIbkATAAAyUctvfO8AACiSQMSU6AAADJp699.png}>" alt="">
+<!--       <div class="qb1"></div>
+      <div class="qb2"></div>
+      <div class="qb3"></div> -->
+      <div class="hint2"></div>
+    </section>
+    <section class="content c1" id="c1">
+      <div class="input-group">
+        <input type="tel" name="cellphone" id="phoneNumber" placeholder="请输入您的手机号">
+        <button id="lingquan" style="background:#ea5249;color:white;">点击领取好梦易到券</button>
+        <input id="appointment" type="button" value="马上用车" style="background:#e5f8f9;color:red;">
+      </div>
+      
+    </section>
+    
+    
+  </div>
+</div>
+
+<iframe frameborder="0" style="display: none;" id="share_iframe"></iframe>
+<!-- 
+<script src="<{asset:js/jquery/jquery-1.8.3.min.js}>"></script>
+ -->
+<script>
+(function () {//分享
+  var shareImg = "";
+  var shareTitle = "";
+
+  document.title = shareTitle;
+  document.getElementById("shareImg").src = shareImg;
+    // 分享变量设置
+  var _protocolLinkBase = "yongche://share?";
+  var _protocolLinkFriend = "yongche://shareToFriend?";
+  var _protocolLinkTimeline = "yongche://shareToTimeline?";
+  var shareRead_link = encodeURIComponent(location.href);// 分享地址
+  var shareRead_pics = encodeURIComponent(shareImg);// 分享的图片
+  var shareRead_title = encodeURIComponent(shareTitle);// 分享的标题
+  var shareRead_content = encodeURIComponent('');// 分享的内容
+  var shareRead_sourceType = 42;
+
+  var Tools = {
+    shareThisPageToFriend:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkFriend + _str;
+        window.location.href = _tmpOpenLink;
+    },
+    shareThisPageToTimeline:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkTimeline + _str;
+        window.location.href = _tmpOpenLink;
+    },
+    shareBase:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkBase + _str;
+        window.location.href = _tmpOpenLink;
+    }
+  };
+  var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&from=iframe";
+  var _tmpOpenLink = _protocolLinkBase + _str;
+  document.getElementById("share_iframe").src = _tmpOpenLink;
+})()
+</script>
+
+
+<!-- start of 滑屏 -->
+<script src="<{asset:u/js/201503/zepto.min.js}>"></script>
+<script>  
+Zepto(function ($){
+  var data = [
+    {//第二幕动画内容，分两部分，隐藏和显示 
+      "wrapId" : "c0",
+      "animateIds" : ["pptit01", "pptit02", "pptit03"  ],
+      "animateClass":["pptit01" , "pptit02" , "pptit03" ],  
+      "done" : false
+    },{  
+     //第二幕动画内容，分两部分，隐藏和显示 
+     "wrapId" : "c1",
+     "animateIds" : ["pp01"],
+     "animateClass":[ "pp01"], 
+     "done" : false
+    },{  
+     "wrapId" : "c2",
+     "animateIds" : ["pp2_01"],
+     "animateClass":["pp2_01"],  
+     "done" : false
+    },{  
+     "wrapId" : "c3",
+     "animateIds" : [ "pp3_01", "pp3_02"],
+     "animateClass":["pp3_01" ,"pp3_02"],  
+     "done" : false
+    },{  
+     "wrapId" : "c4",
+     "animateIds" : [ "pp4_01"],
+     "animateClass":["pp4_01"],  
+     "done" : false
+    },{  
+     "wrapId" : "c5",
+     "animateIds" : [ "pp5_01","pp5_02"],
+     "animateClass":["pp5_01","pp5_02"], 
+     "done" : false
+    },{  
+     "wrapId" : "c6",
+     "animateIds" : ["pp6_01","pp6_02","pp6_03"],
+     "animateClass":["pp6_01","pp6_02","pp6_03"],  
+     "done" : false
+    }
+  ];
+
+  var filterClass = {
+    blur : "blur",
+    focus : "focus"
+  }
+      
+  var $w = $(window),$body=$("body"),$loading = $("#loading"),$wrap = $("#wrap"),
+      $scrollContent = $("#scrollContent"),$content = $(".content");
+  
+  var contentLength = $content.size();  
+
+  function initPage(){
+    var wH = $body.height(),wW = $body.width();
+    $wrap.css({ "height" : wH });
+    $scrollContent.css({ "height" : wH*contentLength });
+    $content.css({ "height" : wH });
+    $(".classname").css({ "top" : parseInt(wW*150/640)+"px" });//图片位置居上边高度 配合 background-size: 100% auto;使用
+  } 
+
+  function resize(){
+    initPage();
+  } 
+
+  function windowLoad(){
+    $("#loading").css({display: "none"});
+    setTimeout(function(){onTouch.initAddClass()},2000);
+    $content.first().addClass("focus");
+  }
+
+  var onTouch = {//这里出现的this都是指onTouch
+    startY : 0,
+    currentTop : 0,
+    i_current:0,
+    wH:$("body").height(),
+    onStart : function (e){
+      this.startY = e.pageY;//首次触屏的位置
+      this.currentTop = this.i_current*this.wH;//这个值带px单位
+      //console.log("首次触屏的位置："+this.startY)
+      if($(e.target).hasClass("abtn")){
+          this.i_current=1;
+          $scrollContent.css({ "-webkit-transform" : "translate3d(0,"+( -this.i_current*this.wH)+ "px,0px)" });
+      }
+    },
+    onMove : function (e){
+      event.preventDefault();
+    },
+    onEnd : function (e){
+      //console.log("结束触屏的位置："+e.pageY)
+      if (this.startY > e.pageY+50) {//向上划屏幕 e.pageY 越靠上越小
+        this.goDown();
+      }else if (this.startY < e.pageY-50) {//向下划屏幕
+        this.goUp();
+      };
+    },
+    goDown : function(){
+      this.i_current++;
+      if(this.i_current>contentLength-1){this.i_current=contentLength-1}
+      this.contentScroll("down");
+    },
+    goUp : function(){
+      this.i_current--;
+      if(this.i_current<0){this.i_current=0}
+      this.contentScroll("up");
+    },
+    contentScroll : function(flag){
+      if (flag=="down") {//contentLength总共有几屏幕的内容
+        if(this.i_current==0){$("#c0").find(div).css("-webkit-animation-play-state","running");}
+        $scrollContent.css({
+          "-webkit-transform" : "translate3d(0,"+( -this.i_current*this.wH)+ "px,0px)"
+        });
+        if(this.i_current==3){$(".box_input").addClass("box_input_current")}
+        this.filterClass("down");
+      }else if (flag=="up"){
+        $scrollContent.css({
+          "-webkit-transform" : "translate3d(0,"+( -this.i_current*this.wH)+ "px,0px)"
+        }); 
+        $(".box_input").removeClass("box_input_current");
+        this.filterClass("up");
+      };
+      this.addClass();
+    },
+    getCurrentIndex : function(){
+      return Math.abs(this.i_current);  
+    },
+    addClass : function(n){
+      var index = this.i_current;
+      var currentObj = data[index];
+      if (currentObj["done"]) {return;};
+      for (var i = 0; i < currentObj["animateIds"].length; i++) {
+        $("#" + currentObj["animateIds"][i]).addClass(currentObj["animateClass"][i]);
+      };
+      currentObj["done"] = true;
+    },
+    initAddClass : function(){
+      this.addClass(0);
+    },
+    filterClass : function(flag){
+      var index = this.getCurrentIndex();
+      if (flag=="up" && index < contentLength-1) {
+        $("#" + data[index]["wrapId"]).addClass(filterClass.focus);
+      }else if (flag=="down" && index > 0) {
+        $("#" + data[index]["wrapId"]).addClass(filterClass.focus);
+      };
+    }
+  };
+  
+  (function(){
+    initPage();
+    window.onload = windowLoad;
+    window.onscroll = scroll;
+    window.onresize = false;
+    window.onorientationchange = false;
+
+    document.body.addEventListener('touchstart', function (e) {
+         e = e.changedTouches[0];
+         onTouch.onStart(e);
+    });
+    document.body.addEventListener('touchmove', function (e) {
+      onTouch.onMove(e.changedTouches[0], e);
+    });
+    document.body.addEventListener('touchend', function (e) {
+      onTouch.onEnd(e.changedTouches[0]);
+    });
+  })();
+});
+
+
+Zepto(function ($){
+
+})
+</script>
+<!-- end of 滑屏 -->
+<{block:bd/sjjk.tpl}>
+<{block:bd/sjjk1.tpl}>
+</body>
+</html>

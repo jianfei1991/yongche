@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<style>
+		.a1{ background: #FFC;}
+		.a2{ background: #ACC;}
+		.a3{ background: #FEC;}
+		.a4{ background: #FCA;}
+
+		*{ margin: 0; padding: 0; list-style: none;}
+		html{ font-size: 20px;}
+		.wrap{ width: 16rem; height: 20rem; border: solid red 10px;}
+		.wrap ul{width:15rem; margin-left: 0.5rem; overflow: hidden;-webkit-transition:all ease .2s;}
+		.wrap ul:hover{ -webkit-transform:translateY(500px);}
+		.wrap ul li{ width: 14rem; height: 20rem; font-size: 1.5rem;}
+
+	</style>
+	<script>
+	// WebkitTransform = 'translateY('+y+'px)';
+		window.onload=window.onresize=function(){
+			document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';	
+		};
+		document.addEventListener('DOMContentLoaded',function(){
+			var oWrap = document.querySelector('.wrap');
+			var oUl   = document.querySelector('.wrap ul');
+			var aLi   = oUl.children;
+		},false);
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<ul>
+			<li class="a1">aa11111111111111111</li>
+			<li class="a2">2222222222222</li>
+			<li class="a3">33333333333333</li>
+			<li class="a4">44444444444444</li>
+		</ul>
+	</div>
+</body>
+</html>

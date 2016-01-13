@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<style>
+	.a1{ background: #FFC;}
+	.a2{ background: #ACC;}
+	.a3{ background: #FEC;}
+	.a4{ background: #FCA;}
+
+	*{ margin: 0; padding: 0; list-style: none;}
+	html{ font-size: 20px;}
+	.wrap{ width: 16rem; height: 30rem; overflow: hidden;}
+	.wrap ul{width:16rem;}
+	.wrap ul li{ width: 16rem; height: 26rem; font-size: 1.5rem;}
+</style>
+<script>
+window.onload=window.onresize=function(){
+	document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';	
+};
+document.addEventListener('DOMContentLoaded', function(){
+	var oWrap = document.querySelector(".wrap");
+	var oUl   = document.querySelector('.wrap ul');
+	var aLi   = oUl.children;
+	var y = 0,space = 50,iNow = 0;
+	oWrap.addEventListener('touchstart',function(ev){
+		var startY = ev.targetTouches[0].pageY;
+		var disY = startY - y;
+		oUl.style.WebkitTransition = 'none';
+		function fnMove(ev){
+			y = ev.targetTouches[0].pageY-disY;
+			//oUl.style.WebkitTransform = 'translateY('+y+'px)';
+		}
+		function fnEnd(ev){
+			oWrap.removeEventListener('touchmove',fnMove,false);
+			oWrap.removeEventListener('touchend',fnEnd,false);
+			// console.log(y);
+			var upY = ev.changedTouches[0].pageY;
+			if(Math.abs(upY-startY)>space){
+				if(startY>upY){//开始>结束
+					iNow++;
+					if(iNow>=aLi.length)iNow=aLi.length-1;
+				} else {
+					iNow--;
+					if(iNow<=0)iNow=0;
+				}
+			}
+			y = -iNow*aLi[0].offsetHeight;
+			oUl.style.WebkitTransition = '.4s all ease';
+			oUl.style.WebkitTransform  = 'translateY('+y+'px)';
+		}
+		oWrap.addEventListener("touchmove",fnMove,false)
+		oWrap.addEventListener("touchend" ,fnEnd,false)
+		// ev.preventDefault();
+	},false)
+},false)
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<ul>
+			<li class="a1">a11111111111111111
+				<input type="text">
+			</li>
+			<li class="a2">2222222222222</li>
+			<li class="a3">33333333333333</li>
+			<li class="a4">44444444444444</li>
+		</ul>
+	</div>
+</body>
+</html>
