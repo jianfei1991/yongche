@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <meta charset="UTF-8">
+  <title>这是我的御用司机，专车出行就约TA</title>
+  <meta name="description" content="强烈推荐我的御用司机，车好人也不错，你也快来试试吧！" />
+  <meta content="width=320,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+  <script>
+  if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+    var version = parseFloat(RegExp.$1);
+    console.log(version)
+    if (version > 2.3) {
+      var phoneScale = parseInt(window.screen.width) / 640;
+      document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+    } else {
+      document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+    }
+  } else {
+    document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+  }
+  </script>
+  <style>
+  /**
+    *by Du Jingjie
+    */
+  /*===============================reset======================================*/
+  
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,
+  nav,
+  section,
+  summary {
+    display: block;
+  }
+  
+  audio,
+  canvas,
+  video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+  }
+  
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+  
+  [hidden] {
+    display: none;
+  }
+  
+  html {
+    font-family: sans-serif;
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    overflow-y: auto;
+  }
+  
+  body,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: normal;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  a:focus {
+    outline: thin dotted;
+  }
+  
+  a:active,
+  a:hover {
+    outline: 0;
+  }
+  
+  b,
+  strong {
+    font-weight: bold;
+  }
+  
+  dfn {
+    font-size: italic;
+  }
+  
+  hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+  }
+  
+  pre {
+    white-space: pre-wrap;
+  }
+  
+  q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+  }
+  
+  q:before,
+  q:after,
+  blockquote:before,
+  blockquote:after {
+    content: "";
+  }
+  
+  small {
+    font-size: 80%;
+  }
+  
+  small {
+    font-size: 85%;
+  }
+  
+  em {
+    font-style: normal;
+  }
+  
+  cite,
+  i {
+    font-style: normal;
+  }
+  
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  
+  img {
+    border: 0;
+  }
+  
+  ::-webkit-input-placeholder {
+    color: #bbb;
+    text-overflow: ellipsis;
+  }
+  
+  :-moz-placeholder {
+    color: #bbb;
+    text-overflow: ellipsis;
+  }
+  
+  ::-moz-placeholder {
+    color: #bbb;
+    text-overflow: ellipsis;
+  }
+  /* for the future */
+  
+  :-ms-input-placeholder {
+    color: #bbb;
+    text-overflow: ellipsis;
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 100%;
+    margin: 0;
+    outline: none;
+    color: inherit;
+    padding: 0
+  }
+  
+  button,
+  input {
+    line-height: normal;
+  }
+  
+  button,
+  select {
+    text-transform: none;
+  }
+  
+  button,
+  html input[type="button"],
+  input[type="reset"],
+  input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+  }
+  
+  button[disabled],
+  html input[disabled] {
+    cursor: default;
+  }
+  
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  
+  textarea {
+    overflow: auto;
+    vertical-align: top;
+  }
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  /*===============================tool======================================*/
+  
+  .hidden {
+    display: none;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  .pull-right {
+    float: right;
+  }
+  
+  .pull-left {
+    float: left;
+  }
+  
+  .clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+  }
+  
+  .clearfix {
+    *zoom: 1;
+  }
+  
+  .plrs {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+  
+  .bg-gray {
+    background-color: #f6f5f5;
+  }
+  
+  .white {
+    color: #fff;
+  }
+  
+  .red {
+    color: #ec4949;
+  }
+  
+  .mr30 {
+    margin-right: 30px;
+  }
+  
+  .mb34 {
+    margin-bottom: 34px;
+  }
+  /*===============================sprite======================================*/
+  
+  .sprite {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url('http://i3.testing.yongche.org/u/images/201507/3587026551.png?1447619160');
+  }
+  
+  .carcard {
+    width: 38px;
+    height: 37px;
+    background-position: -171px -2px
+  }
+  
+  .heart {
+    width: 26px;
+    height: 24px;
+    background-position: -291px -32px
+  }
+  
+  .location {
+    width: 26px;
+    height: 28px;
+    background-position: -291px -2px
+  }
+  
+  .logo {
+    width: 167px;
+    height: 52px;
+    margin-bottom: 37px;
+    background-position: -2px -2px
+  }
+  
+  .money {
+    width: 38px;
+    height: 36px;
+    background-position: -211px -2px
+  }
+  
+  .sit {
+    width: 38px;
+    height: 36px;
+    background-position: -251px -2px
+  }
+  /*===============================page======================================*/
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    height: 100%;
+    text-align: left;
+    font-size: 2.4rem;
+    font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    color: #000;
+    background-color: #fff;
+  }
+  
+  article> section {
+    overflow: hidden;
+  }
+  
+  .descrip-container {
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+  
+  .driver-container {
+    padding-top: 68px;
+    padding-bottom: 40px;
+    text-align: center;
+    color: #c7c9cd;
+    background-color: #132540;
+  }
+  
+  .driver-info {
+    margin-bottom: 190px;
+  }
+  
+  .driver-info>div {
+    margin-left: 70px;
+  }
+  
+  .driver-info .num {
+    font-size: 5rem;
+  }
+  
+  .person-info {
+    height: 135px;
+    line-height: 135px;
+  }
+  
+  .person-info .avatar {
+    width: 135px;
+    height: 135px;
+    border-radius: 50%;
+    margin-right: 22px;
+    box-shadow: 0 0 200px 60px #22436F;
+  }
+  
+  .person-detail {
+    display: inline-block;
+    text-align: left;
+    line-height: normal;
+    vertical-align: middle;
+  }
+  
+  .person-detail .name {
+    margin-right: 26px;
+    font-size: 4rem;
+  }
+  
+  .person-detail .collect {
+    display: inline-block;
+    height: 4rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+    line-height: 4rem;
+    vertical-align: top;
+    color: #000;
+    background-color: #b9bec6;
+  }
+  
+  .detail-show {
+    width: 410px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .detail-show > span {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #acafb5;
+    border-right: 1px solid #acafb5;
+  }
+  
+  .detail-show > span:first-child {
+    padding-left: 0;
+  }
+  
+  .detail-show > span:last-child {
+    border-right: none;
+  }
+  
+  .cartype-container {
+    padding-top: 52px;
+    padding-bottom: 52px;
+  }
+  
+  .cartype {
+    font-size: 4rem;
+    margin-bottom: 40px;
+  }
+  
+  .carinfo-list {
+    margin-top: 40px;
+  }
+  
+  .carinfo-list li {
+    height: 37px;
+    line-height: 37px;
+    margin-bottom: 16px;
+  }
+  
+  .carphoto {
+    width: 485px;
+    margin: 0 auto;
+  }
+  
+  .carphoto img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .facility {
+    padding-top: 55px;
+    padding-bottom: 50px;
+  }
+  
+  .facility > h1 {
+    margin-bottom: 43px;
+    font-size: 3.5rem;
+  }
+  
+  .facility-list li {
+    float: left;
+    width: 25%;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #acafb5;
+  }
+  
+  .facility-list li>div {
+    width: 60px;
+    height: 60px;
+    padding: 20px;
+    margin: 0 auto 13px;
+    border-radius: 50%;
+  }
+  
+  .facility-list li>div>img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .comment {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  
+  .comment h1 {
+    margin-bottom: 45px;
+    font-size: 3.5rem;
+  }
+  
+  .comment-list {
+    max-height: 234px;
+    overflow: hidden;
+  }
+  
+  .comment-list li {
+    display: inline-block;
+    float: left;
+    height: 60px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    line-height: 60px;
+    color: #ec4949;
+    border: 1px solid #ec4949;
+  }
+  
+  .comment-list li>i {
+    margin-left: 10px;
+  }
+  
+  .location-list li {
+    color: #36434e;
+    border: 1px solid #36434e;
+  }
+  
+  .collect-driver {
+    padding: 100px 75px 70px 75px;
+  }
+  
+  .input-card {
+    padding: 28px 22px 33px 22px;
+    margin-top: 53px;
+    margin-bottom: 57px;
+    border: 1px solid #d2d2d2;
+  }
+  
+  .phonenumber {
+    display: block;
+    box-sizing: border-box;
+    height: 58px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+    line-height: 58px;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+    text-align: center;
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: 24px;
+    line-height: 60px;
+    color: #fff;
+    background-color: #ec4949;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .weixin-share {
+    position: relative;
+    padding-top: 60px;
+    padding-bottom: 85px;
+    border-top: 1px solid #b5b5b5;
+    overflow: visible;
+  }
+  
+  .weixin-share > h1 {
+    position: absolute;
+    top: -1.3rem;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    width: 28rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2.4rem;
+    background-color: #fff;
+  }
+  
+  .friend-list li {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-right: 16px;
+    border-radius: 50%;
+  }
+  
+  .friend-list li >img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  
+  .loading_img {
+    display: none;
+    position: absolute;
+    left: 50%;
+    bottom: 200px;
+    margin-left: -32px;
+    margin-top: -32px;
+  }
+  
+  #sub_collect {
+    -webkit-overflow-scrolling: touch;
+    border: solid red 1px;
+  }
+  
+  .downKHD {
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    background: #ec4949;
+    border-radius: 5px;
+    border: none;
+    font-size: 30px;
+    margin: 20px;
+    margin-bottom: 0;
+  }
+  </style>
+  <!-- <script src="http://i2.testing.yongche.org//js/app/wx/viewport.src.js?1447619160"></script> -->
+  <script type="text/javascript">
+  //adaptUILayout.adapt(640);
+  </script>
+</head>
+
+<body ng-controller="ctrl">
+  <article>
+    <section style="" class="descrip-container plrs">
+      <div class="sprite logo"></div>
+      <p class="descrip" ng-bind="data.first"></p>
+      <p class="pull-right clearfix">-- <span ng-bind="data.share_user_name"></span></p>
+    </section>
+    <section class="driver-container plrs">
+      <div class="clearfix driver-info">
+        <div class="pull-right">
+          <p class="white"><i class="num" ng-bind="data.driving_years"></i>年</p>
+          <p>驾龄</p>
+        </div>
+        <div class="pull-right">
+          <p class="white"><i class="num" ng-bind="data.good_comment_rate"></i>%</p>
+          <p>好评率</p>
+        </div>
+        <div class="pull-right">
+          <p class="white"><i class="num" ng-bind="data.service_times"></i>次</p>
+          <p>累计服务</p>
+        </div>
+      </div>
+      <div class="person-info clearfix">
+        <img src={{data.photo}} alt="司机头像" class="avatar pull-left" />
+        <div class="person-detail">
+          <div class="mb34"><i class="name white" ng-bind="data.name"></i><span class="collect"><i class="heart sprite"></i><i ng-bind="data.collect_times"></i>人已收藏</span></div>
+          <div id="detail-show" class="detail-show">
+            <span ng-bind="data.constellation"></span>
+            <span ng-bind="data.age_after"></span>
+            <span ng-bind="data.industry"></span>
+            <span ng-bind="data.label"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 车况 -->
+    <section class="cartype-container plrs">
+      <span class="cartype mr30" ng-bind="data.car_type"></span>
+      <span class="cartype" ng-bind="data.brand"></span>
+      <ul class="carinfo-list">
+        <li><i class="sprite money"></i><span ng-bind="data.fee_per_minute"></span><span>元/分钟+</span><span ng-bind="data.fee_per_kilometer"></span><span>元/公里</span></li>
+        <li><i class="sprite sit"></i><span>可乘<i ng-bind="data.seat_num"></i>人</span></li>
+        <li><i class="sprite carcard"></i><span ng-bind="data.vehicle_number"></span></li>
+      </ul>
+      <div class="carphoto">
+        <img src={{data.car_image[5]}} alt="车辆图片" />
+      </div>
+    </section>
+    <!-- 车内设施-->
+    <section class="facility plrs bg-gray">
+      <h1>车内设施</h1>
+      <ul class="facility-list clearfix">
+        <li ng-repeat="x in data.car_facility_tag">
+          <div><img src={{x.image_id}} alt="" /></div>
+          <p ng-bind="x.tag_text"></p>
+        </li>
+      </ul>
+    </section>
+    <!-- 用户评价-->
+    <section class="plrs comment">
+      <h1><i ng-bind="data.comment_count"></i>条评价</h1>
+      <ul class="comment-list">
+        <li ng-repeat="label in data.comment_tags_stat"><span ng-bind="label.tag_text"></span><i ng-bind="label.count"></i></li>
+      </ul>
+    </section>
+    <!-- 常活动区域-->
+    <section class="activearea comment bg-gray plrs" id="haunt">
+      <h1>常活动区域</h1>
+      <ul class="location-list comment-list">
+        <li ng-repeat="location in data.haunt"><i class="sprite location"></i><span ng-bind="location"></span></li>
+      </ul>
+    </section>
+    <!-- 收藏司机-->
+    <section class="collect-driver">
+      <p ng-bind="data.second">累计<i ng-bind="data.collect_times"></i>人收藏了<i ng-bind="data.name"></i>，人气榜前10哦，易到好司机，遇见了，就不要错过...</p>
+      <div class="input-card">
+        <div class="sprite logo"></div>
+        <div id="hidden1" class="" style="position:relative;">
+          <input id="cellphone" class="phonenumber" type="num" placeholder="输入手机号，好司机收入囊中" />
+          <input id="sub_collect" class="btn" type="button" value="收藏" />
+          <img id="loading_img" class="loading_img" src="http://i3.testing.yongche.org/images/app/common/loading_l.gif?1447619160" width="64" height="64" alt="" />
+        </div>
+        <div id="hidden2" class="after hidden">
+          <p id="hidden3" class="olduser hidden">恭喜，您已收藏了<i ng-bind="data.name">刘师傅</i>，他将第一时间响应您的用车需求。</p>
+          <p id="hidden4" class="newuser hidden">恭喜，您已收藏了TA，期待你们美好的相遇</p>
+          <input class="btn" type="button" value="马上约他" onclick="redirect()" />
+        </div>
+      </div>
+    </section>
+    <div style="height:100px;"></div>
+    <!-- 微信好友收藏-->
+    <section id="weixin-share" class="plrs weixin-share" style="display:none !important;">
+      <h1>收藏的人都是有品位的人</h1>
+      <ul class="friend-list clearfix">
+        <li ng-repeat="x in data.wx_share_list">
+          <div><img style="border-radius:50%" width="80" height="80" src={{x}} alt="" /></div>
+        </li>
+      </ul>
+    </section>
+  </article>
+  <div class="clearfix" style="border-top: solid #ccc 1px;">
+    <div class="pull-left sprite logo" style="margin:20px;margin-bottom:0;"></div>
+    <input type="button" class="pull-right downKHD" value="下载客户端" />
+  </div>
+  <script src="http://i3.testing.yongche.org//js/angular.js?1447619160"></script>
+  <script>
+  var url = "/i/app/driver_card_share.php";
+  var did = "m43gc5trsw9ks80g";
+  var id = "6et9n347s4wkooow";
+  var s = "wx";
+  var e = "1";
+  var app = angular.module('app', []);
+  var cUrl = "/touch/zdhdriver/driver_zdh_create_order.php?id=" + did;
+
+  function redirect() { //跳转马上约她
+    location.href = cUrl;
+  }
+  app.controller('ctrl', function($scope, $http) { //加载执行
+    function loadCollectTimes(oData) { //根据传入收藏次数不同，页面显示不同文案
+      var cTimes = oData.collect_times; //司机被收藏次数
+      if (cTimes < 100) {
+        $scope.data.second = "累计" + cTimes + "人收藏了 " + oData.name + "，易到好司机，遇见了，就不要错过..."
+      } else if (100 <= cTimes && cTimes < 150) {
+        $scope.data.second = "累计" + cTimes + "人收藏了 " + oData.name + "，人气榜前100哦，"
+      } else if (150 <= cTimes && cTimes < 200) {
+        $scope.data.second = "累计" + cTimes + "人收藏了 " + oData.name + "，人气榜前50哦，"
+      } else if (200 <= cTimes) {
+        $scope.data.second = "累计" + cTimes + "人收藏了 " + oData.name + "，人气榜前10哦，"
+      }
+    }
+    $scope.data = {};
+    $http.post(url, {
+      did: did,
+      id: id,
+      type: "dinfo"
+    }).success(function(data) {
+      $scope.data = data.result;
+      if ($scope.data.haunt == "") { //常活动地点
+        document.getElementById('haunt').style.display = "none";
+      }
+      var uTimes = data.result.driver_service_user_cnt; //司机服务分享人次数
+      if (uTimes == 0) {
+        $scope.data.first = "告诉你什么才是真正的专车司机，车新，驾驶平稳，首次乘坐就已经爱上了，快来约他吧..."
+      } else {
+        $scope.data.first = "告诉你什么才是真正的专车司机，风趣幽默，驾驶平稳，准点守时，" + uTimes + "次乘坐已无法自拔，你来试试吧..."
+      }
+      loadCollectTimes(data.result)
+
+      if (data.result.is_shared) { //true表示已经收藏过该用户
+        document.getElementById("hidden1").style.display = "none"; //输入手机号隐藏
+        document.getElementById("hidden2").style.display = "block"; //点击后显示已经收藏
+        document.getElementById("hidden3").style.display = "block"; //
+      }
+      var isWx = data.result.is_wx
+      if (isWx) { //判断是否从微信登陆
+        //alert(data.result.wx_share_list[0].user_id)
+      } else {
+        console.log("不是微信")
+        document.getElementById("weixin-share").style.display = "none";
+      }
+
+      //解决detail-show  当没有传值，右侧留有边框的问题
+      var oDetailShow = document.getElementById("detail-show");
+      setTimeout(function() {
+        for (var i = 0; i < oDetailShow.children.length; i++) {
+          if (oDetailShow.children[i].innerHTML == "") {
+            oDetailShow.removeChild(oDetailShow.children[i]);
+            i--;
+          }
+        }
+      }, 500)
+    });
+    document.getElementById("sub_collect").onfocus = function() {
+
+      this.style.border = "solid blue 3px";
+    }
+    document.getElementById("sub_collect").onblur = function() {
+
+      this.style.border = "solid green 2px";
+    }
+    document.getElementById("sub_collect").onclick = function() { //输入手机号后点击收藏
+      var cellphone = document.getElementById("cellphone").value;
+      var reg = /^0?1[3|4|5|6|7|8]\d{9}$/;
+      if (!reg.test(cellphone)) {
+        alert("号码有误~");
+        return false;
+      }
+      document.getElementById("loading_img").style.display = "block";
+
+      $http.post(url, {
+        did: did,
+        id: id,
+        s: s,
+        e: e,
+        cellphone: cellphone,
+        type: "collect"
+      }).success(function(data2) {
+        document.getElementById("loading_img").style.display = "none";
+        $scope.callData = data2.result;
+        $scope.data.collect_times = data2.result.collect_times;
+        // console.log("1."+$scope.data.collect_times+"--------2."+data2.result.collect_times)
+        $scope.data.wx_share_list = data2.result.wx_share_list;
+        loadCollectTimes(data2.result) //收藏的人数不同，显示不同文案
+        document.getElementById("hidden1").style.display = "none"; //"输入手机号"隐藏
+        document.getElementById("hidden2").style.display = "block"; //显示"已经收藏,马上约她"
+        if (!data2.result.is_new_user) { //判断是否是第一次用车显示不同的文案
+          document.getElementById("hidden3").style.display = "block";
+        } else {
+          document.getElementById("hidden4").style.display = "block";
+        }
+      });
+    }
+  })
+  </script>
+  <script>
+  function onBridgeReady() {
+    WeixinJSBridge.call('hideOptionMenu');
+  }
+
+  if (typeof WeixinJSBridge == "undefined") {
+    if (document.addEventListener) {
+      document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    } else if (document.attachEvent) {
+      document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+      document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+  } else {
+    onBridgeReady();
+  }
+  </script>
+</body>
+
+</html>

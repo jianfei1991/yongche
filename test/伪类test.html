@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>伪类插入test</title>
+</head>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#div1 {
+  border: 1px solid #090;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border: solid red 1px;
+}
+
+#div1:before {
+  border: solid #ccc 10px;
+  content: ".";
+  color: #f00;
+  background: blue;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  width: 50px;
+  font-family: Arial;
+  border-radius: 50%;
+}
+
+#div1:after {
+  content: "】";
+  color: #f00;
+  font-family: Arial;
+}
+</style>
+
+<body>
+  <div id="div1">插入内容</div>
+</body>
+
+</html>

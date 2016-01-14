@@ -1,15 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <title>Document</title>
 </head>
-<body style="position:absolute;height:1200px;width:750px;">
-	<div style="width:80%;height:30%;background:#28144c;opacity:0.8;z-index:1; position:absolute;left:10%;top:30%;"></div>
-  <div style="width:80%;height:30%;position:absolute;left:10%;top:30%; z-index:2;">
-    <p style="padding:60px 20px 0;font-size:32px;color:white;line-height:60px;text-align:left;">双12活动期间每天前一万名在乐视商城购买乐1s金色的支付用户送1099易到用车券，详见乐视商城细则。
-<br>活动时间：12.11 0:00-12.12 24:00</p>
-    <span style="display:block;width:50px;height:50px;background:#28144c;color:white;font-size:80px;text-align:center;line-height:50px;border-radius:50%;transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);position:absolute;right: -15px;top: -15px;">+</span>
+<style>
+body {
+  position: absolute;
+  height: 1200px;
+  width: 750px;
+}
+
+div.bg {
+  width: 80%;
+  height: 30%;
+  background: #28144c;
+  opacity: 0.8;
+  z-index: 1;
+  position: absolute;
+  left: 10%;
+  top: 30%;
+}
+
+div.content {
+  width: 80%;
+  height: 30%;
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  z-index: 2;
+}
+
+p.nr {
+  padding: 60px 20px 0;
+  font-size: 32px;
+  color: white;
+  line-height: 60px;
+  text-align: left;
+}
+
+span.close {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: #28144c;
+  color: white;
+  font-size: 80px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  position: absolute;
+  right: -15px;
+  top: -15px;
+}
+</style>
+
+<body>
+  <div class="bg"></div>
+  <div class="content">
+    <p class="nr">双12活动期间每天前一万名在乐视商城购买乐1s金色的支付用户送1099易到用车券，详见乐视商城细则。
+      <br>活动时间：12.11 0:00-12.12 24:00</p>
+    <span class="close">+</span>
   </div>
 </body>
+
 </html>
