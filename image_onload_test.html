@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script>
+	function loadImage(url, callback){
+    var img =new Image();
+    img.onload =function(){
+        img.onload =null;
+        callback(img);
+    }
+    img.src = url;
+	}
+	loadImage("<{asset:media/g1/M04/07/07/rBEARFZzh1iId1DoAAHTtM1n4RkAAC1IQPtJK8AAdPM456.jpg}>",function(img){
+		console.log("完成")
+		console.log(img.src)
+	})
+</script>
+<body>
+	<img src="" alt="" id="a1">
+</body>
+</html>

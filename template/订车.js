@@ -6,4 +6,4 @@ $("#order_car").click(function() {
     } else {
         window.location.href = "http://m.yongche.com";
     }
-});   
+});  
