@@ -73,28 +73,15 @@ body{height:100%;background: black;}
 <div id="wrap">
   <div id="scrollContent">
     <section class="content c0" id="c0">
-      <img id="circle" class="luner" src="<{asset:media/g1/M02/06/16/rBEARFY8dGqIbkATAAAyUctvfO8AACiSQMSU6AAADJp699.png}>" alt="">
-      <img id="circle2" class="luner2" src="<{asset:media/g1/M02/06/16/rBEARFY8dGqIbkATAAAyUctvfO8AACiSQMSU6AAADJp699.png}>" alt="">
-<!--       <div class="qb1"></div>
-      <div class="qb2"></div>
-      <div class="qb3"></div> -->
       <div class="hint2"></div>
     </section>
     <section class="content c1" id="c1">
-      <div class="input-group">
-        <input type="tel" name="cellphone" id="phoneNumber" placeholder="请输入您的手机号">
-        <button id="lingquan" style="background:#ea5249;color:white;">点击领取好梦易到券</button>
-        <input id="appointment" type="button" value="马上用车" style="background:#e5f8f9;color:red;">
-      </div>
-      
     </section>
-    
-    
   </div>
 </div>
 
 <iframe frameborder="0" style="display: none;" id="share_iframe"></iframe>
-<!-- 
+<!--
 <script src="<{asset:js/jquery/jquery-1.8.3.min.js}>"></script>
  -->
 <script>
@@ -105,14 +92,14 @@ body{height:100%;background: black;}
   document.title = shareTitle;
   document.getElementById("shareImg").src = shareImg;
     // 分享变量设置
-  var _protocolLinkBase = "yongche://share?";
-  var _protocolLinkFriend = "yongche://shareToFriend?";
+  var _protocolLinkBase     = "yongche://share?";
+  var _protocolLinkFriend   = "yongche://shareToFriend?";
   var _protocolLinkTimeline = "yongche://shareToTimeline?";
-  var shareRead_link = encodeURIComponent(location.href);// 分享地址
-  var shareRead_pics = encodeURIComponent(shareImg);// 分享的图片
-  var shareRead_title = encodeURIComponent(shareTitle);// 分享的标题
-  var shareRead_content = encodeURIComponent('');// 分享的内容
-  var shareRead_sourceType = 42;
+  var shareRead_link        = encodeURIComponent(location.href);// 分享地址
+  var shareRead_pics        = encodeURIComponent(shareImg);// 分享的图片
+  var shareRead_title       = encodeURIComponent(shareTitle);// 分享的标题
+  var shareRead_content     = encodeURIComponent('');// 分享的内容
+  var shareRead_sourceType  = 42;
 
   var Tools = {
     shareThisPageToFriend:function(){
@@ -140,44 +127,44 @@ body{height:100%;background: black;}
 
 <!-- start of 滑屏 -->
 <script src="<{asset:u/js/201503/zepto.min.js}>"></script>
-<script>  
+<script>
 Zepto(function ($){
   var data = [
-    {//第二幕动画内容，分两部分，隐藏和显示 
+    {//第二幕动画内容，分两部分，隐藏和显示
       "wrapId" : "c0",
       "animateIds" : ["pptit01", "pptit02", "pptit03"  ],
-      "animateClass":["pptit01" , "pptit02" , "pptit03" ],  
+      "animateClass":["pptit01" , "pptit02" , "pptit03" ],
       "done" : false
-    },{  
-     //第二幕动画内容，分两部分，隐藏和显示 
+    },{
+     //第二幕动画内容，分两部分，隐藏和显示
      "wrapId" : "c1",
      "animateIds" : ["pp01"],
-     "animateClass":[ "pp01"], 
+     "animateClass":[ "pp01"],
      "done" : false
-    },{  
+    },{
      "wrapId" : "c2",
      "animateIds" : ["pp2_01"],
-     "animateClass":["pp2_01"],  
+     "animateClass":["pp2_01"],
      "done" : false
-    },{  
+    },{
      "wrapId" : "c3",
      "animateIds" : [ "pp3_01", "pp3_02"],
-     "animateClass":["pp3_01" ,"pp3_02"],  
+     "animateClass":["pp3_01" ,"pp3_02"],
      "done" : false
-    },{  
+    },{
      "wrapId" : "c4",
      "animateIds" : [ "pp4_01"],
-     "animateClass":["pp4_01"],  
+     "animateClass":["pp4_01"],
      "done" : false
-    },{  
+    },{
      "wrapId" : "c5",
      "animateIds" : [ "pp5_01","pp5_02"],
-     "animateClass":["pp5_01","pp5_02"], 
+     "animateClass":["pp5_01","pp5_02"],
      "done" : false
-    },{  
+    },{
      "wrapId" : "c6",
      "animateIds" : ["pp6_01","pp6_02","pp6_03"],
-     "animateClass":["pp6_01","pp6_02","pp6_03"],  
+     "animateClass":["pp6_01","pp6_02","pp6_03"],
      "done" : false
     }
   ];
@@ -186,11 +173,11 @@ Zepto(function ($){
     blur : "blur",
     focus : "focus"
   }
-      
+
   var $w = $(window),$body=$("body"),$loading = $("#loading"),$wrap = $("#wrap"),
       $scrollContent = $("#scrollContent"),$content = $(".content");
-  
-  var contentLength = $content.size();  
+
+  var contentLength = $content.size();
 
   function initPage(){
     var wH = $body.height(),wW = $body.width();
@@ -198,11 +185,11 @@ Zepto(function ($){
     $scrollContent.css({ "height" : wH*contentLength });
     $content.css({ "height" : wH });
     $(".classname").css({ "top" : parseInt(wW*150/750)+"px" });//图片位置居上边高度 配合 background-size: 100% auto;使用
-  } 
+  }
 
   function resize(){
     initPage();
-  } 
+  }
 
   function windowLoad(){
     $("#loading").css({display: "none"});
@@ -256,14 +243,14 @@ Zepto(function ($){
       }else if (flag=="up"){
         $scrollContent.css({
           "-webkit-transform" : "translate3d(0,"+( -this.i_current*this.wH)+ "px,0px)"
-        }); 
+        });
         $(".box_input").removeClass("box_input_current");
         this.filterClass("up");
       };
       this.addClass();
     },
     getCurrentIndex : function(){
-      return Math.abs(this.i_current);  
+      return Math.abs(this.i_current);
     },
     addClass : function(n){
       var index = this.i_current;
@@ -286,7 +273,7 @@ Zepto(function ($){
       };
     }
   };
-  
+
   (function(){
     initPage();
     window.onload = windowLoad;

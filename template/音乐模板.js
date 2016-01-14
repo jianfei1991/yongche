@@ -1,4 +1,4 @@
-//<div class="music music_ani"></div>
+<div class="music music_ani"></div>
 
 
 
@@ -49,9 +49,6 @@
 		}
    });
 
-
-
-   
 
 var bg = document.createElement('audio');
 bg.src = '';
