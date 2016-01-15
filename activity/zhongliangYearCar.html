@@ -40,7 +40,7 @@ function addLoadEvent(func) { // 解决多个window.onload问题
 function $(dom){
 	document.querySelector(dom).css = function(json){
 		for(var name in json){
-			this.style[name] = json[name]+"px"
+			this.style[name] = json[name];
 		}
 		
 	}
@@ -64,7 +64,7 @@ var _hmt = _hmt || [];
 </script>
 	<style>
 	.a1{ background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXn7KIWTuMAAEXhv_ukWMAADZNQOnzwsAARee370.jpg?1452712080) no-repeat;}
-	.a2{ background: url(http://i3.yongche.name/media/g1/M01/08/22/rBEAQ1aXaciIXonuAAE-6J4hoJIAADY8wOhzqgAAT8A914.jpg?1452712080) no-repeat;}
+	.a2{ background: url(http://i3.yongche.name/media/g1/M04/08/26/rBEARFaYnQOIO8WPAAFSwrwgGyQAADaQQP2ThoAAVLa631.jpg?1452798600) no-repeat;}
 	.a3{ background: url(http://i1.yongche.name/media/g1/M03/08/23/rBEAQ1aXfZ2IYKutAAEBpTLt_U8AADZCwPvFcYAAQG9006.jpg?1452712080) no-repeat;}
 	.a3 a {display: block;position: absolute;height: 120px; width: 408px; left: 50%; margin-left: -204px; background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXc9mIY5SzAABrpuSaLFAAADZBAJdY1oAAGu-869.png?1452712080) no-repeat;}
 	a#want{top:800px; background-position: 0 0;}
@@ -84,13 +84,18 @@ var _hmt = _hmt || [];
 }
 .sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(http://i2.yongche.name/media/g1/M01/08/23/rBEARFaXnYWIXKttAAFLbPfWkKUAADZMwIeCisAAUuE704.png?1452712080); position: absolute;}
 
-.w1           {width:579px; height:148px; background-position: -2px -84px;    left: 50%; top: -200px; margin-left:-290px;}
-.w2           {width:0px; height:80px;  background-position: -2px -2px;     left: 50%; top: 360px; margin-left:-336px;}
-.w3a          {width:375px; height:140px; background-position: -583px -184px; left: 60px; top: 515px;}
-.w3b          {width:259px; height:97px;  background-position: -2px -366px;   left: 440px; top: 522px;}
-.w4a          {width:336px; height:130px; background-position: -2px -234px;   left: 90px; top: 610px;}
-.w4b          {width:154px; height:95px;  background-position: -302px -415px; left: 422px; top: 614px;}
-.ww5          {width:405px; height:180px; background-position: -676px -2px;   left: 131px; top: 715px;}
+.w1           {width:579px; height:148px; background-position: -2px -84px;    left: 50%; top: 200px; margin-left:-290px;}
+.w2           {width:672px; height:80px;  background-position: -2px -2px;     left: 50%; top: 360px; margin-left:-336px;}
+.w3a          {width:375px; height:140px; background-position: -583px -184px; left: 60px; top: 515px; 
+	transform: perspective(800px) rotateY(-90deg) rotateX(0deg);transform-style: preserve-3d; opacity: 0}
+.w3b          {width:259px; height:97px;  background-position: -2px -366px;   left: 440px; top: 522px;
+	transform: perspective(800px) rotateY(-90deg) rotateX(0deg);transform-style: preserve-3d; opacity: 0}
+.w4a          {width:336px; height:130px; background-position: -2px -234px;   left: 90px; top: 610px;
+	transform: perspective(800px) rotateY(-90deg) rotateX(0deg);transform-style: preserve-3d; opacity: 0}
+.w4b          {width:154px; height:95px;  background-position: -302px -415px; left: 422px; top: 614px;
+	transform: perspective(800px) rotateY(-90deg) rotateX(0deg);transform-style: preserve-3d; opacity: 0}
+.ww5          {width:405px; height:180px; background-position: -676px -2px;   left: 131px; top: 715px;
+	transform: perspective(800px) rotateY(-90deg) rotateX(0deg);transform-style: preserve-3d; opacity: 0}
 .w6a          {width:192px; height:179px; background-position: -579px -326px; left: 60px;  top: 986px;}
 .w6b          {width:280px; height:179px; background-position: -960px -302px; left: 235px; top: 986px;}
 .w6c          {width:237px; height:179px; background-position: -340px -234px; left: 470px; top: 986px;}
@@ -186,14 +191,16 @@ document.getElementById("wrap").style.height = document.documentElement.clientHe
 
 addLoadEvent(function(){
 	setTimeout(function(){
-		$(".w1").css({"top":"200"});
+		$('.w3a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
 		setTimeout(function(){
-			$('.w2').css({
-				width: '672'
-			});
-			console.log("width")
-		},1000)
-	},500)
+			$('.w3b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+			setTimeout(function(){
+				$('.w4a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+				$('.w4b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+				$('.ww5').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+			},800)
+		},800)
+	},1000)
 })
 </script>
 </body>
