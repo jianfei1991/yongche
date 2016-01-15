@@ -99,3 +99,13 @@ function addLoadEvent(func) { // 解决多个window.onload问题
      } 
   } 
 } 
+
+function $(dom){
+  document.querySelector(dom).css = function(json){
+    for(var name in json){
+      this.style[name] = json[name];
+    }
+    
+  }
+  return document.querySelector(dom);
+}
