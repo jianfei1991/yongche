@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+	<style>
+	.a1{ background: #FFC;}
+	.a2{ background: #ACC;}
+	.a3{ background: #FEC;}
+	.a4{ background: #FCA;}
+
+	*{ margin: 0; padding: 0; list-style: none;}
+	html{ font-size: 20px;}
+	.wrap{ width: 14rem; height: 20rem; overflow: hidden;margin-left:20px;border:solid green 1px;margin-top:20px;}
+	.wrap ul{width:16rem;}
+	.wrap ul li{ width: 16rem; height: 26rem; font-size: 1.5rem;}
+</style>
+<script>
+function addLoadEvent(func) { // 解决多个window.onload问题 
+  var oldonload = window.onload; 
+  if (typeof window.onload != 'function') { 
+   window.onload = func; 
+  } else { 
+    window.onload = function() { 
+      oldonload(); 
+      func(); 
+     } 
+  } 
+} 
+function $(dom){
+  document.querySelector(dom).css = function(json){
+    for(var name in json){
+      this.style[name] = json[name];
+    }
+  }
+  return document.querySelector(dom);
+}
+</script>
+<script>
+window.onload=window.onresize=function(){
+	document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';	
+};
+document.addEventListener('DOMContentLoaded', function(){
+	var oWrap = $(".wrap");
+	var oUl   = $('.wrap ul');
+	var aLi   = oUl.children;
+	var y = 0,space = 50,iNow = 0,yyy=0,startY=0;
+	oWrap.addEventListener('touchstart',function(ev){
+		startY = ev.targetTouches[0].pageY;
+		oUl.style.WebkitTransition = 'none';
+		// var disY = startY - y;
+		function fnMove(ev){
+			// y = ev.targetTouches[0].pageY-disY;
+			// oUl.style.WebkitTransform = 'translateY('+y+'px)';
+			ev.preventDefault();
+		}
+		function fnEnd(ev){
+			oWrap.removeEventListener('touchmove',fnMove,false);
+			oWrap.removeEventListener('touchend',fnEnd,false);
+			var upY = ev.changedTouches[0].pageY;
+			if(Math.abs(upY-startY)>space){
+				if(startY>upY){//开始>结束
+					iNow++;
+					if(iNow>=aLi.length)iNow=aLi.length-1;
+				} else {
+					iNow--;
+					if(iNow<=0)iNow=0;
+				}
+			}
+			y = -iNow*aLi[0].offsetHeight;
+			oUl.style.WebkitTransition = '.4s all ease';
+			oUl.style.WebkitTransform  = 'translateY('+y+'px)';
+		}
+		oWrap.addEventListener("touchmove",fnMove,false)
+		oWrap.addEventListener("touchend" ,fnEnd,false)
+		// ev.preventDefault();
+	},false)
+},false)
+</script>
+</head>
+<body>
+	<div class="wrap">
+		<ul>
+			<li class="a1">a11111111111111111
+				<input type="tel">
+			</li>
+			<li class="a2">2222222222222</li>
+			<li class="a3">33333333333333</li>
+			<li class="a4">44444444444444</li>
+		</ul>
+	</div>
+</body>
+</html>
