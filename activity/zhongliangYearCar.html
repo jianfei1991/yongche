@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<script src="<{asset:js/jquery/jquery-1.8.3.min.js}>"></script>
 <script type= "text/javascript" >
 // alert(window.screen.width)
 if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
@@ -37,7 +38,7 @@ function addLoadEvent(func) { // 解决多个window.onload问题
   } 
 } 
 
-function $(dom){
+function $$(dom){
 	document.querySelector(dom).css = function(json){
 		for(var name in json){
 			this.style[name] = json[name];
@@ -63,10 +64,43 @@ var _hmt = _hmt || [];
 })();
 </script>
 	<style>
-	.a1{ background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXn7KIWTuMAAEXhv_ukWMAADZNQOnzwsAARee370.jpg?1452712080) no-repeat;}
-	.a2{ background: url(http://i3.yongche.name/media/g1/M04/08/26/rBEARFaYnQOIO8WPAAFSwrwgGyQAADaQQP2ThoAAVLa631.jpg?1452798600) no-repeat;}
-	.a3{ background: url(http://i1.yongche.name/media/g1/M03/08/23/rBEAQ1aXfZ2IYKutAAEBpTLt_U8AADZCwPvFcYAAQG9006.jpg?1452712080) no-repeat;}
-	.a3 a {display: block;position: absolute;height: 120px; width: 408px; left: 50%; margin-left: -204px; background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXc9mIY5SzAABrpuSaLFAAADZBAJdY1oAAGu-869.png?1452712080) no-repeat;}
+	/*music*/
+	.music_ani {
+    -webkit-animation: music 2s linear infinite;
+    animation: music 2s linear infinite;
+}
+
+.music {
+    width: 43px;
+    height: 42px;
+    position: absolute;
+    top: 62px;
+    right: 26px;
+    z-index: 999;
+    background: url('http://i3.yongche.name/u/images/201601/2706009813.png?1452798600') no-repeat center center;
+}
+@-webkit-keyframes music {
+  0% {
+    -webkit-transform:rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform:rotate(360deg);
+  }
+}
+@keyframes music {
+  0% {
+    transform:rotate(0deg);
+  }
+
+  100% {
+    transform:rotate(360deg);
+  }
+}	/*music*/
+	.a1{ background: url(http://i1.yongche.name/media/g1/M03/08/23/rBEAQ1aXn7KIWTuMAAEXhv_ukWMAADZNQOnzwsAARee370.jpg?1452798600) no-repeat;}
+	.a2{ background: url(http://i1.yongche.name/media/g1/M04/08/26/rBEARFaYnQOIO8WPAAFSwrwgGyQAADaQQP2ThoAAVLa631.jpg?1452798600) no-repeat;}
+	.a3{ background: url(http://i1.yongche.name/media/g1/M03/08/23/rBEAQ1aXfZ2IYKutAAEBpTLt_U8AADZCwPvFcYAAQG9006.jpg?1452798600) no-repeat;}
+	.a3 a {display: block;position: absolute;height: 120px; width: 408px; left: 50%; margin-left: -204px; background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXc9mIY5SzAABrpuSaLFAAADZBAJdY1oAAGu-869.png?1452798600) no-repeat;}
 	a#want{top:800px; background-position: 0 0;}
 	a#send{top:970px; background-position: 0 -120px;}
 
@@ -76,13 +110,13 @@ var _hmt = _hmt || [];
 	.wrap ul{width:750px;}
 	.wrap ul li{ width: 750px; height: 1206px; background-size: contain; position: relative;}
 
-.hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(http://i3.yongche.name/media/g1/M02/08/16/rBEARFaXsfaIa44UAAAG7mwKSYEAADUNgP_-PcAAAcJ421.png?1452712080) no-repeat center bottom; background-size: 100% auto; }
+.hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(http://i3.yongche.name/media/g1/M02/08/16/rBEARFaXsfaIa44UAAAG7mwKSYEAADUNgP_-PcAAAcJ421.png?1452798600) no-repeat center bottom; background-size: 100% auto; }
 @-webkit-keyframes hint-move { 
     0% { opacity: 0; bottom: 60px; }
    70% { opacity: 1; bottom: 55px; }
   100% { opacity: 0; bottom: 60px; }
 }
-.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(http://i2.yongche.name/media/g1/M01/08/23/rBEARFaXnYWIXKttAAFLbPfWkKUAADZMwIeCisAAUuE704.png?1452712080); position: absolute;}
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(http://i1.yongche.name/media/g1/M01/08/23/rBEARFaXnYWIXKttAAFLbPfWkKUAADZMwIeCisAAUuE704.png?1452798600); position: absolute;}
 
 .w1           {width:579px; height:148px; background-position: -2px -84px;    left: 50%; top: 200px; margin-left:-290px;}
 .w2           {width:672px; height:80px;  background-position: -2px -2px;     left: 50%; top: 360px; margin-left:-336px;}
@@ -111,6 +145,7 @@ li.a1 div{transition:1s all cubic-bezier(0.5,-0.51, 0.32, 1.88)}
 </head>
 <body>
 	<div class="wrap" id="wrap">
+	<div class="music music_ani"></div>
 		<ul id="setHeight">
 			<li class="a1">
 				<div class="sprite w1"></div>
@@ -171,6 +206,16 @@ document.addEventListener('DOMContentLoaded', function(){
 					if(iNow<=0)iNow=0;
 				}
 			}
+			console.log(iNow)
+			if(iNow==0){
+				pageOne()
+			} else if(iNow>0){
+				$$('.w3a').css({opacity: '0',});
+				$$('.w3b').css({opacity: '0',});
+				$$('.w4a').css({opacity: '0',});
+				$$('.w4b').css({opacity: '0',});
+				$$('.ww5').css({opacity: '0',});
+			}
 			y = -iNow*aLi[0].offsetHeight;
 			oUl.style.WebkitTransition = '1s all ease';
 			oUl.style.WebkitTransform  = 'translateY('+y+'px)';
@@ -189,19 +234,39 @@ for(var i = 0; i < oLi.length; i++){
 }
 document.getElementById("wrap").style.height = document.documentElement.clientHeight+"px";
 
-addLoadEvent(function(){
+function pageOne(){
 	setTimeout(function(){
-		$('.w3a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+		$$('.w3a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
 		setTimeout(function(){
-			$('.w3b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+			$$('.w3b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
 			setTimeout(function(){
-				$('.w4a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
-				$('.w4b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
-				$('.ww5').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+				$$('.w4a').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+				$$('.w4b').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
+				$$('.ww5').css({transform: 'perspective(000px) rotateY(0deg) rotateX(0deg)',opacity:1});
 			},800)
 		},800)
-	},1000)
+	},800)
+}
+addLoadEvent(function(){
+	pageOne()
 })
+
+$('.music').bind('touchstart', function (e) {
+	if($(this).hasClass('music_ani')) {
+		$(this).removeClass('music_ani');
+		bg.pause();
+	} else {
+		$(this).addClass('music_ani');
+		bg.play();
+	}
+});
+
+
+var bg = document.createElement('audio');
+bg.src = 'http://i2.yongche.name/u/download/201601/nianhuozhuanche.mp3?1452798600';
+bg.loop = true;
+bg.autoplay = true;
+bg.play();
 </script>
 </body>
 </html>
