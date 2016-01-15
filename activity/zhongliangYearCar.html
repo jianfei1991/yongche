@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<script type= "text/javascript" >
+// alert(window.screen.width)
+if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
+  var  version = parseFloat(RegExp.$1);
+  if (version>2.3){
+    var  phoneScale = parseInt(window.screen.width)/750;
+    document.write( '<meta name="viewport" content="width=750, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">' );
+  } else {
+    document.write( '<meta name="viewport" content="width=750, target-densitydpi=device-dpi">' );
+  }
+} else {
+  document.write( '<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">' );
+}
+if (navigator.userAgent.indexOf( 'MicroMessenger' ) >= 0){//微信去掉下方刷新栏
+  document.addEventListener( 'WeixinJSBridgeReady' ,  function () {
+    //WeixinJSBridge.call('hideToolbar');
+  });
+}
+String.prototype.isPhone = function(){
+  return /^((1[3578]{1})+\d{9})$/.test(this);
+};
+function addLoadEvent(func) { // 解决多个window.onload问题 
+  var oldonload = window.onload; 
+  if (typeof window.onload != 'function') { 
+   window.onload = func; 
+  } else { 
+    window.onload = function() { 
+      oldonload(); 
+      func(); 
+     } 
+  } 
+} 
+
+function $(dom){
+	document.querySelector(dom).css = function(json){
+		for(var name in json){
+			this.style[name] = json[name]+"px"
+		}
+		
+	}
+	return document.querySelector(dom);
+}
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-18761483-4', 'auto');  ga('send', 'pageview');
+</script>
+<!-- 百度统计： -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?24b50d3a9a73a0efd25feab8f04d313f";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+	<style>
+	.a1{ background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXn7KIWTuMAAEXhv_ukWMAADZNQOnzwsAARee370.jpg?1452712080) no-repeat;}
+	.a2{ background: url(http://i3.yongche.name/media/g1/M01/08/22/rBEAQ1aXaciIXonuAAE-6J4hoJIAADY8wOhzqgAAT8A914.jpg?1452712080) no-repeat;}
+	.a3{ background: url(http://i1.yongche.name/media/g1/M03/08/23/rBEAQ1aXfZ2IYKutAAEBpTLt_U8AADZCwPvFcYAAQG9006.jpg?1452712080) no-repeat;}
+	.a3 a {display: block;position: absolute;height: 120px; width: 408px; left: 50%; margin-left: -204px; background: url(http://i3.yongche.name/media/g1/M03/08/23/rBEAQ1aXc9mIY5SzAABrpuSaLFAAADZBAJdY1oAAGu-869.png?1452712080) no-repeat;}
+	a#want{top:800px; background-position: 0 0;}
+	a#send{top:970px; background-position: 0 -120px;}
+
+	*{ margin: 0; padding: 0; list-style: none;}
+	html{ font-size: 20px; background:#F7EEE7;}
+	.wrap{ width: 750px; height: 1206px; overflow: hidden;}
+	.wrap ul{width:750px;}
+	.wrap ul li{ width: 750px; height: 1206px; background-size: contain; position: relative;}
+
+.hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(http://i3.yongche.name/media/g1/M02/08/16/rBEARFaXsfaIa44UAAAG7mwKSYEAADUNgP_-PcAAAcJ421.png?1452712080) no-repeat center bottom; background-size: 100% auto; }
+@-webkit-keyframes hint-move { 
+    0% { opacity: 0; bottom: 60px; }
+   70% { opacity: 1; bottom: 55px; }
+  100% { opacity: 0; bottom: 60px; }
+}
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(http://i2.yongche.name/media/g1/M01/08/23/rBEARFaXnYWIXKttAAFLbPfWkKUAADZMwIeCisAAUuE704.png?1452712080); position: absolute;}
+
+.w1           {width:579px; height:148px; background-position: -2px -84px;    left: 50%; top: -200px; margin-left:-290px;}
+.w2           {width:0px; height:80px;  background-position: -2px -2px;     left: 50%; top: 360px; margin-left:-336px;}
+.w3a          {width:375px; height:140px; background-position: -583px -184px; left: 60px; top: 515px;}
+.w3b          {width:259px; height:97px;  background-position: -2px -366px;   left: 440px; top: 522px;}
+.w4a          {width:336px; height:130px; background-position: -2px -234px;   left: 90px; top: 610px;}
+.w4b          {width:154px; height:95px;  background-position: -302px -415px; left: 422px; top: 614px;}
+.ww5          {width:405px; height:180px; background-position: -676px -2px;   left: 131px; top: 715px;}
+.w6a          {width:192px; height:179px; background-position: -579px -326px; left: 60px;  top: 986px;}
+.w6b          {width:280px; height:179px; background-position: -960px -302px; left: 235px; top: 986px;}
+.w6c          {width:237px; height:179px; background-position: -340px -234px; left: 470px; top: 986px;}
+.denglong     {width:75px;  height:298px; background-position: -1083px -2px;  left: 76px; top: 727px;}
+.flower_left  {width:111px; height:74px;  background-position: -458px -415px; left: 58px; top: 500px;}
+.flower_right {width:98px;  height:93px;  background-position: -960px -184px; left: 531px; top: 724px;}
+.money1       {width:37px;  height:52px;  background-position: -263px -366px; left: 630px; top: 476px;}
+.money2       {width:62px;  height:71px;  background-position: -583px -84px;  left: 40px; top: 657px;}
+.money3       {width:111px; height:123px; background-position: -773px -326px; left: 613px; top: 695px;}
+li.a1 {position: relative;}
+li.a1 div{transition:1s all cubic-bezier(0.5,-0.51, 0.32, 1.88)}
+</style>
+</head>
+<body>
+	<div class="wrap" id="wrap">
+		<ul id="setHeight">
+			<li class="a1">
+				<div class="sprite w1"></div>
+				<div class="sprite w2"></div>
+				<div class="sprite w3a"></div>
+				<div class="sprite w3b"></div>
+				<div class="sprite w4a"></div>
+				<div class="sprite w4b"></div>
+				<div class="sprite ww5"></div>
+				<div class="sprite w6a"></div>
+				<div class="sprite w6b"></div>
+				<div class="sprite w6c"></div>
+				<div class="sprite denglong"></div>
+				<div class="sprite flower_left"></div>
+				<div class="sprite flower_right"></div>
+				<div class="sprite money1"></div>
+				<div class="sprite money2"></div>
+				<div class="sprite money3"></div>
+			</li>
+			<li class="a2"></li>
+			<li class="a3">
+				<a href="" id="want"></a>
+				<a href="" id="send"></a>
+			</li>
+		</ul>
+	</div>
+
+
+<script>
+window.onload=window.onresize=function(){
+	document.documentElement.style.fontSize=document.documentElement.clientWidth/16+'px';	
+};
+document.addEventListener('DOMContentLoaded', function(){
+	var oWrap = document.querySelector(".wrap");
+	var oUl   = document.querySelector('.wrap ul');
+	var aLi   = oUl.children;
+	var y = 0,space = 50,iNow = 0;
+	oWrap.addEventListener('touchstart',function(ev){
+		var startY = ev.targetTouches[0].pageY;
+		var disY = startY - y;
+		oUl.style.WebkitTransition = 'none';
+		function fnMove(ev){
+			y = ev.targetTouches[0].pageY-disY;
+			// oUl.style.WebkitTransform = 'translateY('+y+'px)';
+			ev.preventDefault();
+		}
+		function fnEnd(ev){
+			oWrap.removeEventListener('touchmove',fnMove,false);
+			oWrap.removeEventListener('touchend',fnEnd,false);
+			// console.log(y);
+			var upY = ev.changedTouches[0].pageY;
+			if(Math.abs(upY-startY)>space){
+				if(startY>upY){//开始>结束
+					iNow++;
+					if(iNow>=aLi.length)iNow=aLi.length-1;
+				} else {
+					iNow--;
+					if(iNow<=0)iNow=0;
+				}
+			}
+			y = -iNow*aLi[0].offsetHeight;
+			oUl.style.WebkitTransition = '1s all ease';
+			oUl.style.WebkitTransform  = 'translateY('+y+'px)';
+			// ev.preventDefault();
+		}
+		oWrap.addEventListener("touchmove",fnMove,false)
+		oWrap.addEventListener("touchend" ,fnEnd,false)
+		
+	},false)
+},false)
+
+console.log(document.documentElement.clientWidth+":::"+document.documentElement.clientHeight)
+var oLi = document.getElementById("setHeight").getElementsByTagName("li");
+for(var i = 0; i < oLi.length; i++){
+	oLi[i].style.height = document.documentElement.clientHeight+"px";
+}
+document.getElementById("wrap").style.height = document.documentElement.clientHeight+"px";
+
+addLoadEvent(function(){
+	setTimeout(function(){
+		$(".w1").css({"top":"200"});
+		setTimeout(function(){
+			$('.w2').css({
+				width: '672'
+			});
+			console.log("width")
+		},1000)
+	},500)
+})
+</script>
+</body>
+</html>

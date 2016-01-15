@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+div.div {
+    width: 100px;
+    height: 100px;
+    background: #f8a;
+    -webkit-animation: change 1s infinite ease;
+    animation-delay: 3s;
+    -webkit-animation-direction:alternate;
+}
+
+@-webkit-keyframes change {
+    0% {
+        width: 300px;
+    }
+    50% {
+        width: 400px;
+    }
+    100% {
+        width: 380px;
+    }
+}
+</style>
+
+<body>
+    <div class="div"></div>
+</body>
+
+</html>
