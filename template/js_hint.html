@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+  <!-- uc强制竖屏 --><meta name="screen-orientation" content="portrait">
+  <!-- QQ强制竖屏 --><meta name="x5-orientation" content="portrait">
+  <style>
+  *{ margin: 0; padding: 0; list-style: none;}
+  input[type="submit"], input[type="reset"], input[type="button"], button { -webkit-appearance: none; /*去掉苹果的默认UI来渲染按钮*/}
+  ::-webkit-input-placeholder { /* WebKit browsers */color: #3d2621;}
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #3d2621;}
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */color: #3d2621;}
+  :-ms-input-placeholder { /* Internet Explorer 10+ */color: #3d2621;}
+  .a1{ background: url(http://i2.yongche.name/media/g1/M04/08/3D/rBEAQ1agRF-IB6PsAAC1DyOdnNIAADjJwN7QhkAALUn870.jpg?1453318920) no-repeat;}
+  .a2{ background: url(http://i1.yongche.name/media/g1/M04/08/3D/rBEAQ1agRF-INweSAAGBmrbOoQ8AADjJwOAtXYAAYGy833.jpg?1453318920) no-repeat;}
+  .a3{ background: url(http://i3.yongche.name/media/g1/M01/08/3C/rBEARFagRF6INTJnAAB9y7FjLbQAADjJQP90f0AAH3j004.jpg?1453318920) no-repeat;}
+  .a4{ background: url(http://i1.yongche.name/media/g1/M01/08/3C/rBEARFagRF6IaFCAAADtQPxVfwgAADjJQP-T-AAAO1Y667.jpg?1453318920) no-repeat;}
+  .a5{ background: url(http://i3.yongche.name/media/g1/M03/08/3D/rBEARFagRHyIJUmZAACR356jWD4AADjJgMNHY0AAJH3738.jpg?1453318920) no-repeat;}
+
+  html{ font-size: 20px;}
+  .wrap{ background: black;}
+  .wrap ul li{width: 750px; height: 1218px; position: relative;}
+  a#down{display: block;height: 59px;width: 365px;position: absolute;left: 50%;margin-left: -182px;top:934px;background: url(http://i2.yongche.name/media/g1/M03/08/3D/rBEAQ1agRHyIaQPyAAAlCeZgPqIAADjJgMNr4QAACUh085.png?1453318920) no-repeat;}
+</style>
+</head>
+<body>
+<img id="shareImg" src="" style="position:fixed;left:-100%;" />
+  <div class="wrap">
+    <ul>
+      <li class="a1">
+        <div id="asd1" class="hint"></div>
+      </li>
+      <li class="a2">
+        <div id="asd2" class="hint"></div>
+      </li>
+      <li class="a3">
+        <div id="asd3" class="hint"></div>
+      </li>
+      <li class="a4">
+        <div id="asd4" class="hint"></div>
+      </li>
+      <li class="a5">
+        <a href="http://m.yongche.com" id="down"></a>
+      </li>
+    </ul>
+  </div>
+<iframe frameborder="0" style="display: none;" id="share_iframe"></iframe>
+
+<script>
+function $$(dom){
+  return document.querySelector(dom);
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var oWrap = document.querySelector(".wrap");
+  var oUl   = document.querySelector('.wrap ul');
+  var aLi   = oUl.children;
+  var y = 0,space = 50,iNow = 0;
+  oWrap.addEventListener('touchstart',function(ev){
+    var startY = ev.targetTouches[0].pageY;
+    var disY = startY - y;
+    oUl.style.WebkitTransition = 'none';
+
+    function liewenShow(){
+      document.getElementById("liewen").style.opacity = "1";
+      oWrap.removeEventListener('webkitTransitionEnd',liewenShow,false);
+    }
+    function fnMove(ev){
+      y = ev.targetTouches[0].pageY-disY;
+      //oUl.style.WebkitTransform = 'translateY('+y+'px)';
+      ev.preventDefault();
+    }
+    function fnEnd(ev){
+      oWrap.removeEventListener('touchmove',fnMove,false);
+      oWrap.removeEventListener('touchend' ,fnEnd,false);
+      // console.log(y);
+      var upY = ev.changedTouches[0].pageY;
+      if(Math.abs(upY-startY)>space){
+        if(startY>upY){//开始>结束
+          iNow++;
+          if(iNow>=aLi.length)iNow=aLi.length-1;
+        } else {
+          iNow--;
+          if(iNow<=0)iNow=0;
+        }
+      }
+      console.log("iNow="+iNow)
+      if(iNow==2){
+        if(document.getElementById("liewen")){
+          oWrap.addEventListener('webkitTransitionEnd',liewenShow,false);
+        }
+      }
+      y = -iNow*aLi[0].offsetHeight;
+      oUl.style.WebkitTransition = '0.6s all ease-out';
+      oUl.style.WebkitTransform  = 'translateY('+y+'px)';
+    }
+    oWrap.addEventListener("touchmove",fnMove,false)
+    oWrap.addEventListener("touchend" ,fnEnd,false)
+  },false)
+},false)
+</script>
+
+<script>
+function getStyle(obj, name){
+	return obj.currentStyle?obj.currentStyle[name]:getComputedStyle(obj, false)[name];
+}
+/*
+type——运动类型
+
+0   匀速
+1   加速
+2   减速
+
+'a'   匀速
+'b'   加速
+'c'   减速
+
+'linear'  匀速
+'ease-in' 加速
+'ease-out'  减速
+*/
+function move(obj, json, options)
+{
+  //time, type, fn
+  options=options||{};
+  options.time=options.time||300;
+  options.type=options.type||'ease-out';
+
+  var start={};
+  var dis={};
+
+  for(var name in json) {
+    if(name=='opacity') {
+      start[name]=parseFloat(getStyle(obj, name));
+    } else {
+      start[name]=parseInt(getStyle(obj, name));
+    }
+    dis[name]=json[name]-start[name];
+  }
+
+  /*
+  console.log('起点', start);
+  console.log('终点', json);
+  console.log('距离', dis);
+  */
+
+  var count=Math.round(options.time/30);
+  var n=0;
+
+  clearInterval(obj.timer);
+  obj.timer=setInterval(function (){
+    n++;
+
+    for(var name in json) {
+      switch(options.type) {
+        case 'linear':
+          var cur=start[name]+dis[name]*n/count;
+          break;
+        case 'ease-in':
+          var a=n/count;
+          var cur=start[name]+dis[name]*a*a*a;
+          break;
+        case 'ease-out':
+          var a=1-n/count;
+          var cur=start[name]+dis[name]*(1-a*a*a);
+          break;
+      }
+
+      if(name=='opacity') {
+        obj.style.opacity=cur;
+        obj.style.filter='alpha(opacity:'+cur*100+')';
+      } else {
+        obj.style[name]=cur+'px';
+      }
+    }
+
+    if(n==count) {
+      clearInterval(obj.timer);
+      options.fn && options.fn();
+    }
+  }, 30);
+}
+</script>
+
+<style type="text/css">
+	.hint { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; background: url(http://i2.yongche.name/media/g1/M01/07/02/rBEARFacwFqIW3VMAAAG7nq_zqIAACzSgP_-PoAAAcG905.png?1453059720) no-repeat center bottom; background-size: 100% auto; }
+	.hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(http://i2.yongche.name/media/g1/M01/07/02/rBEARFacwFqIW3VMAAAG7nq_zqIAACzSgP_-PoAAAcG905.png?1453059720) no-repeat center bottom; background-size: 100% auto; }
+	  @-webkit-keyframes hint-move { 
+      0% {}
+     70% { opacity: 1; bottom: 25px; }
+    100% { opacity: 0; bottom: 30px; }
+  }
+</style>
+<script>
+	var hint = document.getElementsByClassName("hint")
+	function mm(obj){
+		move(obj, { 'opacity': 0, 'bottom': '25'},{'time':350,fn:function(){
+			move(obj,{ 'opacity': 1, 'bottom': '35'},{'time':600,fn:function(){
+				move(obj,{ 'opacity': 0, 'bottom': '25'},{'time':250,fn:function(){
+					mm(hint[0]);
+					mm(hint[1]);
+					mm(hint[3]);
+					mm(hint[2]);
+				}})
+			}})
+		}})
+	}
+	mm(hint[0]);
+	mm(hint[1]);
+	mm(hint[3]);
+	mm(hint[2]);
+</script>
+</body>
+</html>

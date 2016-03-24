@@ -17,17 +17,17 @@
 	.wrap ul li{ width: 16rem; height: 26rem; font-size: 1.5rem;}
 </style>
 <script>
-function addLoadEvent(func) { // 解决多个window.onload问题 
-  var oldonload = window.onload; 
-  if (typeof window.onload != 'function') { 
-   window.onload = func; 
-  } else { 
-    window.onload = function() { 
-      oldonload(); 
-      func(); 
-     } 
-  } 
-} 
+function addLoadEvent(func) { // 解决多个window.onload问题
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+   window.onload = func;
+  } else {
+    window.onload = function() {
+      oldonload();
+      func();
+     }
+  }
+}
 function $(dom){
   document.querySelector(dom).css = function(json){
     for(var name in json){

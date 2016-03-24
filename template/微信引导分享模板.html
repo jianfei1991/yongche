@@ -4,7 +4,7 @@
 
 
 <div class="share_img">
-  <img src="<{asset:u/images/201510/2383441749.png}>">
+  <img src="http://i2.yongche.name/media/g1/M02/0D/18/rBEAQ1bhe5qIdMeiAAGdKPxyDSsAAFRugC5VhgAAZ1A131.png">
 </div>
 
 
@@ -15,3 +15,13 @@ $(".share_img").show();
 $(".share_img").click(function(){
 	$(".share_img").hide();
 });
+
+
+$("#shareOut").live('touchstart', function(){
+  $(".share_img").show();
+})
+
+
+$(".share_img").live('touchstart', function(){
+  $(".share_img").hide();
+})

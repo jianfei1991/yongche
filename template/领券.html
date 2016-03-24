@@ -64,6 +64,11 @@ $(function(){
 
 
 
+	var isApp = false;
+	if(navigator.userAgent.indexOf("YongChe")!=-1){//如果是app
+		isApp = true;
+	}
+	isInApp = isApp?"loginuser":"cellphone";
 
 	$("#lingquan").click(function() {//领券22222222222        自动化
 
@@ -73,7 +78,7 @@ $(function(){
 	  		type: 'GET',
 	  		dataType: "jsonp",
 	  		// dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-	  		data: {key: 'k6nut2120kg0g0ks', issendto: 'cellphone', cellphone: $("#phoneNumber").val()},
+	  		data: {key: 'k6nut2120kg0g0ks', issendto: isInApp, cellphone: $("#phone").val()},
 	  		success: function(json){
 	  			console.log(json)
 	  			alert(json.msg)

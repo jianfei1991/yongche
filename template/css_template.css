@@ -1,0 +1,80 @@
+11-字体							17-hint2提示翻页					51-去掉苹果的默认UI来渲染按钮
+60-提示按钮可点击效果
+
+
+
+
+
+
+
+
+/*字体*/
+body {
+    font: 12px/1.5 arial, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+}
+
+
+/*hint2提示翻页*/
+.hint2 {
+    height: 27px;
+    width: 36px;
+    z-index: 99;
+    position: absolute;
+    left: 50%;
+    margin-left: -14px;
+    opacity: 1;
+    bottom: 5px;
+    -webkit-animation: hint-move 0.7s infinite ease;
+    background: url(http://i2.yongche.name/media/g1/M01/07/02/rBEARFacwFqIW3VMAAAG7nq_zqIAACzSgP_-PoAAAcG905.png?1453059720) no-repeat center bottom;
+    /*http://i2.yongche.name/media/g1/M01/07/02/rBEARFacwFqIW3VMAAAG7nq_zqIAACzSgP_-PoAAAcG905.png?1453059720      白色带阴影*/
+    /*<{asset:u/images/201511/2213493820.png}>    清绿色   67 * 32  */
+    /*<{asset:u/images/201505/963892759.png}>   未知*/
+    background-size: 100% auto;
+}
+@-webkit-keyframes hint-move {
+    0% {
+        opacity: 0;
+        bottom: 10px;
+    }
+    70% {
+        opacity: 1;
+        bottom: 5px;
+    }
+    100% {
+        opacity: 0;
+        bottom: 0px;
+    }
+}
+
+
+
+/*去掉苹果的默认UI来渲染按钮*/
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+  -webkit-appearance: none;
+}
+
+
+/*提示按钮可点击效果*/
+.sel_btn {
+    box-shadow: 10px 10px 5px green;
+    -webkit-transition: all 1.2s linear;
+    -webkit-animation: sel-move 0.7s infinite ease;
+}
+
+@-webkit-keyframes sel-move {
+    0% {
+        box-shadow: 1px 1px 2px green;
+        box-shadow: 0px 2px 10px green, 0px -2px 10px yellow, 2px 0px 10px red, -2px 0 10px blue;
+    }
+    50% {
+        box-shadow: 1px 1px 15px green;
+        box-shadow: 0px 2px 5px red, 0px -2px 5px green, 2px 0px 5px blue, -2px 0 5px yellow;
+    }
+    100% {
+        box-shadow: 1px 1px 2px green;
+        box-shadow: 0px 2px 10px green, 0px -2px 10px yellow, 2px 0px 10px red, -2px 0 10px blue;
+    }
+}

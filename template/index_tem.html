@@ -3,41 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
-  <!-- uc强制竖屏 --><meta name="screen-orientation" content="portrait">
-  <!-- QQ强制竖屏 --><meta name="x5-orientation" content="portrait">
-<script>
-  if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
-    var  version = parseFloat(RegExp.$1);
-    if (version>2.3){
-      var  phoneScale = parseInt(window.screen.width)/750;
-      document.write( '<meta name="viewport" content="width=750, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi,user-scalable=no">' );
-    } else {
-      document.write( '<meta name="viewport" content="width=750, target-densitydpi=device-dpi,user-scalable=no">' );
-    }
-  } else {
-    document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
-  }
-</script>
-<script src="http://i2.yongche.name/js/mobile/zepto.min.js?1456388280"></script>
-<!-- 提示，安装时请将GA代码和百度统计代码同时安装，代码和规则如下：
-H5端：
-安装方法：</head>标签前 -->
-<!-- GA: -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-18761483-4', 'auto');  ga('send', 'pageview');
-</script>
-<!-- 百度统计： -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?24b50d3a9a73a0efd25feab8f04d313f";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+  <{block:bd/wjf_footer.tpl}><!-- 内含mwta、GA、windowOnload(fn)、$$(dom).css({json})、getStyle(obj, name)、move(obj, json, options)->options:{time、type、fn} -->
+
   <style>
   *{ margin: 0; padding: 0; list-style: none;}
   .hint2 { height: 27px; width: 36px; z-index: 99; position: absolute; left: 50%; margin-left: -14px; opacity: 1; bottom: 55px; -webkit-animation: hint-move 1.2s infinite ease; background: url(http://i2.yongche.name/media/g1/M01/07/02/rBEARFacwFqIW3VMAAAG7nq_zqIAACzSgP_-PoAAAcG905.png?1453059720) no-repeat center bottom; background-size: 100% auto; }
@@ -148,60 +115,12 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 <script>
-(function () {//分享
-  var shareImg = "";
-  var shareTitle = "";
-  var shareContent = "";
-
-  document.title = shareTitle;
-  document.getElementById("shareImg").src = shareImg;
-    // 分享变量设置
-  var _protocolLinkBase = "yongche://share?";
-  var _protocolLinkFriend = "yongche://shareToFriend?";
-  var _protocolLinkTimeline = "yongche://shareToTimeline?";
-  var shareRead_link = encodeURIComponent(location.href);// 分享地址
-  var shareRead_pics = encodeURIComponent(shareImg);// 分享的图片
-  var shareRead_title = encodeURIComponent(shareTitle);// 分享的标题
-  var shareRead_content = encodeURIComponent(shareContent);// 分享的内容
-  var shareRead_sourceType = 42;
-
-  var Tools = {
-    shareThisPageToFriend:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkFriend + _str;
-        window.location.href = _tmpOpenLink;
-    },
-    shareThisPageToTimeline:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkTimeline + _str;
-        window.location.href = _tmpOpenLink;
-    },
-    shareBase:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkBase + _str;
-        window.location.href = _tmpOpenLink;
-    }
-  };
-  var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&from=iframe";
-  var _tmpOpenLink = _protocolLinkBase + _str;
-
-  if (navigator.userAgent.indexOf('YongChe') != -1) {
-    document.getElementById("share_iframe").src = _tmpOpenLink;
+  var sWX = {
+    shareImg:"1.2s",
+    shareTitle:"2",
+    shareContent:"3"
   }
-
-
-  var shareData = {
-                "title": document.title,
-                "desc": shareContent,
-                "imgUrl" : shareImg ,
-                "link" : window.location.href
-            };
-  var wxConfig = [];
-  // wxConfig = <?= $js_data ? json_encode($js_data) : '[]';?>;
-  var callback = {};
-  var c =  new WxJsApi(wxConfig,shareData,callback);
-  c.init();
-})()
 </script>
+<{block:bd/wjf_footer.tpl}>
 </body>
 </html>

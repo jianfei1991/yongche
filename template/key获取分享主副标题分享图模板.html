@@ -1,0 +1,11 @@
+<script type="text/javascript">
+	$.ajax({
+		url: 'http://market.yongche.com/activity/api/getshareinfo?key=h442y21zs4cogk4k',
+		type: 'GET',
+		dataType: 'json',
+		data: {key: 'h442y21zs4cogk4k', issendto: isInApp, cellphone: $("#phone").val()},
+		success: function(json){
+			console.log(json)
+		}
+	})
+</script>

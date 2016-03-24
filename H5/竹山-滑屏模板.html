@@ -1,101 +1,92 @@
 <script>
-function hand_slide(conf,callback){
-         
-        if(typeof(conf) != 'object'){
-            if(typeof(conf) != 'function'){
-                return false;
-            } else {
-                var callback = conf;
-                var conf={};
-            }
-        }
-        var sets={
-            container         : '',             //父容器，必须。   
-            children          : '',             //子容器，必须。插件就是对这些子容器进行切换
-            direct            : 'horizontal'    //方向，默认水平方向
-        };
-        for(var i in conf){
-            sets[i]=conf[i];
-        }
+function hand_slide(conf, callback) {
 
-        if(sets.direct == 'vertical') {
-            sets.pageXY = 'pageY';
-            sets.translateXY = 'translateY';
-            sets.offsetWH = 'offsetHeight';
+    if (typeof(conf) != 'object') {
+        if (typeof(conf) != 'function') {
+            return false;
         } else {
-            sets.pageXY = 'pageX';
-            sets.translateXY = 'translateX';
-            sets.offsetWH = 'offsetWidth';
+            var callback = conf;
+            var conf = {};
         }
+    }
+    var sets = {
+        container: '', //父容器，必须。
+        children: '', //子容器，必须。插件就是对这些子容器进行切换
+        direct: 'horizontal' //方向，默认水平方向
+    };
+    for (var i in conf) {
+        sets[i] = conf[i];
+    }
+
+    if (sets.direct == 'vertical') {
+        sets.pageXY = 'pageY';
+        sets.translateXY = 'translateY';
+        sets.offsetWH = 'offsetHeight';
+    } else {
+        sets.pageXY = 'pageX';
+        sets.translateXY = 'translateX';
+        sets.offsetWH = 'offsetWidth';
+    }
 
 
 
-        var translate=0;
+    var translate = 0;
 
-        var iNow = 0;
+    var iNow = 0;
 
-        var hand_slide = this;
+    var hand_slide = this;
 
-        var oDiv = sets.container;
-        var aDl  = sets.children;
+    var oDiv = sets.container;
+    var aDl = sets.children;
 
-        var num = aDl.length;
+    var num = aDl.length;
 
-      oDiv.addEventListener('touchstart',function(ev){
-        oDiv.style.WebkitTransition='none';
-        var disXY=ev.targetTouches[0][sets.pageXY]-translate;
-        var downXY=ev.targetTouches[0][sets.pageXY];
-        
-        function fnMove(ev){
-        
-            if(Math.abs(ev.targetTouches[0][sets.pageXY]-downXY)>20){
-              translate=ev.targetTouches[0][sets.pageXY]-disXY;
-              oDiv.style.WebkitTransform=sets.translateXY+'('+translate+'px)';  
+    oDiv.addEventListener('touchstart', function(ev) {
+        oDiv.style.WebkitTransition = 'none';
+        var disXY = ev.targetTouches[0][sets.pageXY] - translate;
+        var downXY = ev.targetTouches[0][sets.pageXY];
+
+        function fnMove(ev) {
+            if (Math.abs(ev.targetTouches[0][sets.pageXY] - downXY) > 20) {
+                translate = ev.targetTouches[0][sets.pageXY] - disXY;
+                oDiv.style.WebkitTransform = sets.translateXY + '(' + translate + 'px)';
             }
-          
+
             ev.preventDefault()
         }
-        
-        function fnEnd(ev){
-          oDiv.removeEventListener('touchmove',fnMove,false);
-          oDiv.removeEventListener('touchend',fnEnd,false);
-          
-                if(Math.abs(ev.changedTouches[0][sets.pageXY]-downXY)>20){
-                      if(ev.changedTouches[0][sets.pageXY]<downXY){
-                        iNow++;
-                      }else{
-                        iNow--;
-                      }
-                }
 
-      
+        function fnEnd(ev) {
+            oDiv.removeEventListener('touchmove', fnMove, false);
+            oDiv.removeEventListener('touchend', fnEnd, false);
 
-                if(iNow<0) {
-                    iNow=0;
-                }else if(iNow>num-1) {
-                    iNow=num-1;
+            if (Math.abs(ev.changedTouches[0][sets.pageXY] - downXY) > 20) {
+                if (ev.changedTouches[0][sets.pageXY] < downXY) {
+                    iNow++;
+                } else {
+                    iNow--;
                 }
-                
-        translate=-iNow*aDl[0][sets.offsetWH];
-        oDiv.style.WebkitTransition='.4s all ease';
-        oDiv.style.WebkitTransform=sets.translateXY+'('+translate+'px)';
-        //document.title=x; 
-                    
-          
-          
-          
+            }
+
+
+            if (iNow < 0) {
+                iNow = 0;
+            } else if (iNow > num - 1) {
+                iNow = num - 1;
+            }
+
+            translate = -iNow * aDl[0][sets.offsetWH];
+            oDiv.style.WebkitTransition = '.4s all ease';
+            oDiv.style.WebkitTransform = sets.translateXY + '(' + translate + 'px)';
+            //document.title=x; 
         }
-        oDiv.addEventListener('touchmove',fnMove,false);
-        oDiv.addEventListener('touchend',fnEnd,false);
+        oDiv.addEventListener('touchmove', fnMove, false);
+        oDiv.addEventListener('touchend', fnEnd, false);
 
+        if (Math.abs(ev.targetTouches[0][sets.pageXY] - downXY) > 20) ev.preventDefault();
+    }, false);
 
-        
-        if(Math.abs(ev.targetTouches[0][sets.pageXY]-downXY)>20) ev.preventDefault();
-      },false);
-
-        oDiv.addEventListener('webkitTransitionEnd',function(){
-            callback && callback(iNow)
-        },false);
-    } 
-
+    oDiv.addEventListener('webkitTransitionEnd', function() {
+        callback && callback(iNow)
+    }, false);
+}
 </script>

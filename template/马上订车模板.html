@@ -1,11 +1,36 @@
 
-    <a href="yongche://neworder?type=asap" id="appointment"></a>
+<a href="yongche://neworder?type=asap" id="appointment"></a>
 
-    <script>
-			if (navigator.userAgent.indexOf( 'MicroMessenger' ) >= 0){
-			 document.addEventListener( 'WeixinJSBridgeReady' ,  function () {
-			   //WeixinJSBridge.call('hideToolbar');
-			 });
-			 document.getElementById("appointment").href="http://m.yongche.com";//
-			}
-    </script>
+<script>
+	if (navigator.userAgent.indexOf( 'MicroMessenger' ) >= 0){
+	 document.addEventListener( 'WeixinJSBridgeReady' ,  function () {
+	   //WeixinJSBridge.call('hideToolbar');
+	 });
+	 document.getElementById("appointment").href="http://m.yongche.com";//
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    	//马上订车
+	var city='<?=$gCity?>';
+	$("#order_car").click(function() {
+	    if (navigator.userAgent.indexOf('YongChe') != -1) {
+	        window.location.href = "yongche://neworder?car_type_id=55&type=asap&city="+city;
+	    } else {
+	        window.location.href = "http://m.yongche.com";
+	    }
+	});
+</script>
