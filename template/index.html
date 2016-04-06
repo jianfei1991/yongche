@@ -1,3 +1,9 @@
+<?php
+    define('NO_AUTH',1);
+    require $_SERVER['PHP_ROOT'] . 'init.inc.php';
+    $url = YC_Util::getCurrentUrl();
+    $js_data = YC_Util::getWeixinSignature($url);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

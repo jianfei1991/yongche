@@ -1,9 +1,32 @@
+<?php
+    define('NO_AUTH',1);
+    require $_SERVER['PHP_ROOT'] . 'init.inc.php';
+    $url = YC_Util::getCurrentUrl();
+    $js_data = YC_Util::getWeixinSignature($url);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <{block:bd/wjf_footer.tpl}><!-- 内含mwta、GA、windowOnload(fn)、$$(dom).css({json})、getStyle(obj, name)、move(obj, json, options)->options:{time、type、fn} -->
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+  <!-- uc强制竖屏 --><meta name="screen-orientation" content="portrait">
+  <!-- QQ强制竖屏 --><meta name="x5-orientation" content="portrait">
+  <script>
+    if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
+      var  version = parseFloat(RegExp.$1);
+      if (version>2.3){
+        var  phoneScale = parseInt(window.screen.width)/750;
+        document.write( '<meta name="viewport" content="width=750, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi,user-scalable=no">' );
+      } else {
+        document.write( '<meta name="viewport" content="width=750, target-densitydpi=device-dpi,user-scalable=no">' );
+      }
+    } else {
+      document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
+    }
+  </script>
+  <!-- <{block:bd/wjf_header.tpl}> -->
+  <!-- 内含GA、windowOnload(fn)、$$(dom).css({json})、getStyle(obj, name)、move(obj, json, options)->options:{time、type、fn} -->
 
   <style>
   *{ margin: 0; padding: 0; list-style: none;}
@@ -74,14 +97,11 @@ document.addEventListener('DOMContentLoaded', function(){
     var disY = startY - y;
     oUl.style.WebkitTransition = 'none';
 
-    function liewenShow(){
-      document.getElementById("liewen").style.opacity = "1";
-      oWrap.removeEventListener('webkitTransitionEnd',liewenShow,false);
-    }
     function fnMove(ev){
       y = ev.targetTouches[0].pageY-disY;
       //oUl.style.WebkitTransform = 'translateY('+y+'px)';
       ev.preventDefault();
+      ev.cancelBubble = true;
     }
     function fnEnd(ev){
       oWrap.removeEventListener('touchmove',fnMove,false);
@@ -98,11 +118,6 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       }
       console.log("iNow="+iNow)
-      if(iNow==2){
-        if(document.getElementById("liewen")){
-          oWrap.addEventListener('webkitTransitionEnd',liewenShow,false);
-        }
-      }
       y = -iNow*aLi[0].offsetHeight;
       oUl.style.WebkitTransition = '0.6s all ease-out';
       oUl.style.WebkitTransform  = 'translateY('+y+'px)';
@@ -116,11 +131,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <script>
   var sWX = {
-    shareImg:"1.2s",
-    shareTitle:"2",
-    shareContent:"3"
+    shareImg:"",
+    shareTitle:"",
+    shareContent:""
   }
+
+
+// 横屏监听
+var updateOrientation = function(){
+  if(window.orientation=='-90' || window.orientation=='90'){
+    alert('为了更好的体验，请将手机/平板竖过来！');
+  }else{
+    console.log('竖屏状态');
+  }
+};
+    window.onorientationchange = updateOrientation;//横屏提示
 </script>
-<{block:bd/wjf_footer.tpl}>
+<!-- <{block:bd/wjf_footer.tpl}> -->
 </body>
 </html>

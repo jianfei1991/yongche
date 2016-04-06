@@ -1,27 +1,23 @@
 
-.share_img{position: fixed;left: 0;top: 0;z-index: 9999;width: 100%;height: 100%;display: none;}
-.share_img img{width: 100%;}
+#share_img{position: fixed;left: 0;top: 0;z-index: 9999;width: 100%;height: 100%;display: none;}
+#share_img img{width: 100%;}
 
 
-<div class="share_img">
+<div id="share_img">
   <img src="http://i2.yongche.name/media/g1/M02/0D/18/rBEAQ1bhe5qIdMeiAAGdKPxyDSsAAFRugC5VhgAAZ1A131.png">
 </div>
 
 
-$(".share_img").show();
+<script>
+	document.getElementById("").addEventListener("touchstart",function(ev){
+		document.getElementById("share_img").style.display = "block";
+		ev.cancelBubble = true;
+		ev.preventDefault();
+	})
 
-
-
-$(".share_img").click(function(){
-	$(".share_img").hide();
-});
-
-
-$("#shareOut").live('touchstart', function(){
-  $(".share_img").show();
-})
-
-
-$(".share_img").live('touchstart', function(){
-  $(".share_img").hide();
-})
+	document.getElementById("share_img").addEventListener("touchend",function(){
+		document.getElementById("share_img").style.display = "none";
+		ev.cancelBubble = true;
+		ev.preventDefault();
+	})
+</script>
