@@ -1,5 +1,67 @@
 <script>
-$(function(){
+	$("#lingquan").bind("touchstart",function(){
+		function lingquanEnd(){
+			lingquan($("#celPhone").val())
+			$("#lingquan").unbind('touchend',lingquanEnd);
+		}
+		function lingquan(phone){
+			if((/^((1[35678]{1})+\d{9})$/.test(phone))){
+				$.ajax({
+		  		url: 'http://market.yongche.com/activity/api/aftertakePartin',
+		  		type: 'GET',dataType: "jsonp",
+		  		data: {key: 'k6nut2120kg0g0ks', issendto: "cellphone", cellphone: phone},
+		  		success: function(json){
+		  			alert(json.msg=="成功"?"恭喜您领券成功":json.msg)
+		  			console.log(json)
+		  		},
+		  		error: function(msg){
+		  			console.log(msg)
+		  			alert(msg)
+		  		}
+		  	})
+			}else{
+		  	alert('请输入正确的手机号')
+		  }
+		}
+		$("#lingquan").bind('touchmove',function(){return false;});
+		$("#lingquan").bind('touchend',lingquanEnd);
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	$(function(){
 	var isApp = false;
 	if(navigator.userAgent.indexOf("YongChe")!=-1){//如果是app
 		isApp = true;
@@ -37,7 +99,6 @@ $(function(){
 		}
 
 		console.log(isAgree)
-
 
 		$.ajax({
 			url: 'http://market.yongche.com/miscellaneous/toyota/dosave',

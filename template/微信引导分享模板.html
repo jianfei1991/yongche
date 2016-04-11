@@ -9,7 +9,11 @@
 
 
 <script>
-	document.getElementById("").addEventListener("touchstart",function(ev){
+	var guideShare = document.getElementById("")
+	guideShare.addEventListener("touchstart",function(ev){
+		guideShare.addEventListener('touchmove',function(){
+			return false;
+		})
 		document.getElementById("share_img").style.display = "block";
 		ev.cancelBubble = true;
 		ev.preventDefault();
@@ -19,5 +23,8 @@
 		document.getElementById("share_img").style.display = "none";
 		ev.cancelBubble = true;
 		ev.preventDefault();
+	})
+	document.getElementById("share_img").addEventListener("touchmove",function(){
+		return false;
 	})
 </script>
