@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input id="file" type="file" accept="image/*" />
+	<script src="lrz.js"></script>
+	<script>
+		document.querySelector('#file').addEventListener('change', function () {
+	  lrz(this.files[0])
+	        .then(function (rst) {
+	        	console.log(1)
+	            // 处理成功会执行
+	        })
+	        .catch(function (err) {
+	        	console.log(2)
+	            // 处理失败会执行
+	        })
+	        .always(function () {
+	        	console.log(3)
+	            // 不管是成功失败，都会执行
+	        });
+		});
+	</script>
+</body>
+</html>
