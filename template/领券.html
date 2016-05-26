@@ -5,7 +5,7 @@
 			$("#lingquan").unbind('touchend',lingquanEnd);
 		}
 		function lingquan(phone){
-			if((/^((1[35678]{1})+\d{9})$/.test(phone))){
+			if(/^1[345678]\d{9}$/.test(phone)){
 				$.ajax({
 		  		url: 'http://market.yongche.com/activity/api/aftertakePartin',
 		  		type: 'GET',dataType: "jsonp",

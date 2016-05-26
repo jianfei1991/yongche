@@ -1,0 +1,122 @@
+<script>
+/*
+    TOUCH_EVENTS 由于click事件在移动设备上有200ms左右的延时，所以提供在移动设备上的触摸事件
+    ele : 在哪个元素上触摸
+    conf : {draw:'point'或'line'}，point：触摸范围在10px以内，当成点击事件;line：滑动事件;
+           由于触摸事件会冒泡，但又不想阻止冒泡（多个元素的触摸事件都需要回调)，冒泡的时候会根据此参数选择执行哪个回调，不知是否还有更好的方法；
+
+    callback : 回调函数
+*/
+function TOUCH_EVENTS(ele,conf,callback){
+    if(ele == null || ele == undefined) return;
+
+    if(typeof(conf) != 'object'){
+        if(typeof(conf) == 'function'){
+            var callback = conf;
+        }
+        var conf={};
+    }
+    var sets={
+        draw:'point',
+        prevent : true,        //阻止默认事件
+        stopPropagation : false,//阻止冒泡
+        defaultTranslateX : 0,  //X轴默认位置
+        defaultTranslateY : 0   //Y轴默认位置
+    };
+    for(var i in conf){
+        sets[i]=conf[i];
+    }
+
+    this.translateX=sets.defaultTranslateX;
+    this.translateY=sets.defaultTranslateY;
+
+    var TOUCH_EVENTS = this;
+
+    //触摸设备上使用touch事件，非触摸设备使用mouse事件
+    var is_support_touch = 'ontouchstart' in window;
+    var TOUCH = is_support_touch ?
+        {
+            down : 'touchstart',
+            move : 'touchmove',
+            up   : 'touchend'
+        }
+        :
+        {
+            down : 'mousedown',
+            move : 'mousemove',
+            up   : 'mouseup'
+        };
+
+
+    ele.addEventListener(TOUCH.down,function(ev) {
+
+        sets.down && sets.down();//按下的时候需要执行的函数
+
+        var _this = this;
+
+        var client_pos = (ev.targetTouches && ev.targetTouches[0]) || ev;
+
+        var disX  =  client_pos.pageX-TOUCH_EVENTS.translateX;
+        var disY  =  client_pos.pageY-TOUCH_EVENTS.translateY;
+        var downX =  client_pos.pageX;
+        var downY =  client_pos.pageY;
+
+        function get_direction(x1, x2, y1, y2) {
+            var xDelta = Math.abs(x1 - x2), yDelta = Math.abs(y1 - y2);
+            return xDelta >= yDelta ? (x1 - x2 > 0 ? 'horizontal.right' : 'horizontal.left') : (y1 - y2 > 0 ? 'vertical.down' : 'vertical.up')
+        }
+
+        function fnMove(ev){
+
+            var client_pos = (ev.targetTouches && ev.targetTouches[0]) || ev;
+
+            var slide_direct = get_direction(client_pos.pageX,downX,client_pos.pageY,downY);
+
+            if(sets.draw == 'line') {
+
+                if(!sets.direct || slide_direct.indexOf(sets.direct) == 0){
+                    ev.preventDefault();
+                }
+            }
+
+            TOUCH_EVENTS.translateX=client_pos.pageX-disX;
+            TOUCH_EVENTS.translateY=client_pos.pageY-disY;
+
+            if(typeof(sets.moving) == 'function') {
+                if(!sets.direct || slide_direct.indexOf(sets.direct) == 0){//根据“滑动的方向”与“设置的方向”是否一致来判断是否执行回调函数
+                    sets.moving(_this,client_pos,downX,downY);//移动的时候的回调函数
+                }
+            }
+            //alert(sets.draw);
+        }
+
+        function fnEnd(ev){
+            //ev.preventDefault();
+            //ev.stopPropagation();
+            _this.removeEventListener(TOUCH.move,fnMove,false);
+            _this.removeEventListener(TOUCH.up,fnEnd,false);
+
+            var client_pos = (ev.changedTouches && ev.changedTouches[0]) || ev;
+
+            var slide_direct = get_direction(client_pos.pageX,downX,client_pos.pageY,downY);
+
+            if(sets.draw == 'point'){
+                if(Math.abs(client_pos.pageX-downX)<=10 && Math.abs(client_pos.pageY-downY)<=10){
+                    callback && callback(_this);
+                }
+            } else if(sets.draw == 'line'){
+                sets.up && sets.up();//松开的时候需要执行的函数，跟滑动的方向无关，如果设置了sets.up,一定会执行此函数
+                if(!sets.direct || slide_direct.indexOf(sets.direct) == 0){//根据“滑动的方向”与“设置的方向”是否一致来判断是否执行回调函数
+                    callback && callback(_this,client_pos,downX,downY);//松开的时候的回调函数
+                }
+            }
+        }
+
+        _this.addEventListener(TOUCH.move,fnMove,false);
+        _this.addEventListener(TOUCH.up,fnEnd,false);
+
+		if(ev.prevent) ev.preventDefault();
+        if(sets.stopPropagation) ev.stopPropagation();
+    },false);
+}
+</script>
