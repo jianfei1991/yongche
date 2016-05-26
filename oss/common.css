@@ -1,8 +1,0 @@
-/*
-*所有页面都引用的通用css
-*/
-*{padding:0;margin:0;}
-body{font-size: 12px;}
-.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
-.clearfix{*+height:1%;}
-.right{float: right;}
