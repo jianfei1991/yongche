@@ -19,7 +19,7 @@
 		ev.preventDefault();
 	})
 
-	document.getElementById("share_img").addEventListener("touchend",function(){
+	document.getElementById("share_img").addEventListener("touchend",function(ev){
 		document.getElementById("share_img").style.display = "none";
 		ev.cancelBubble = true;
 		ev.preventDefault();
