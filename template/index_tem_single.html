@@ -1,0 +1,239 @@
+<?php
+  define('NO_AUTH',1);
+  require $_SERVER['PHP_ROOT'] . 'init.inc.php';
+  $url = YC_Util::getCurrentUrl();
+  $js_data = YC_Util::getWeixinSignature($url);
+
+  $gUserId = ServerTokenV3::getUserId();
+  $isLogin = $gUserId ? true : false;
+  $can_jump_to_rebate=false;
+  if(isset($_SERVER['HTTP_USER_AGENT'])){
+    $ga=$_SERVER['HTTP_USER_AGENT'];
+    $pattern="/YongChe\/([0-9.])+/";
+    preg_match($pattern,$ga,$match);
+    if(!empty($match)){
+      $version=substr($match[0],8,6);
+      if(version_compare($version, '6.3.8')>0){
+          $can_jump_to_rebate=true;
+      }
+    }
+   }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+<meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
+<meta name="x5-orientation" content="portrait"><!-- QQ强制竖屏 -->
+<title></title>
+<script>
+  if (/Android (\d+\.\d+)/.test(navigator.userAgent)){//安卓
+    var  version = parseFloat(RegExp.$1);
+    if (version>2.3){
+      var  phoneScale = parseInt(window.screen.width)/750;
+      document.write( '<meta name="viewport" content="width=750, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi,user-scalable=no">' );
+    } else {
+      document.write( '<meta name="viewport" content="width=750, target-densitydpi=device-dpi,user-scalable=no">' );
+    }
+  } else {
+    document.write('<meta name="viewport" content="width=750, user-scalable=no, target-densitydpi=device-dpi">');
+  }
+</script>
+<{block:bd/wjf_header.tpl}>
+<!-- 内含GA、windowOnload(fn)、$$(dom).css({json})、getStyle(obj, name)、move(obj, json, options)->options:{time、type、fn} -->
+<style>/*弹窗模板*/
+  #tan_mask {position: fixed;left: 0;top: 0;width: 100%; height: 100%;background:black;opacity: 0.8;z-index: 999999998;}
+  #tanchuang{position: fixed;left: 0;top: 0;width: 550px;z-index: 999999999;left:50%;margin-left: -275px;border-radius:15px;overflow:hidden;top: 50%;}
+  #tan_header{height:95px; background: #f7f7f7 url(http://i1.yongche.name/media/g1/M03/1A/2D/rBEAQ1dFf_mIcuWzAAAR9dJfX7UAAKe_QMETOoAABIN774.png) no-repeat center; position: relative;}
+  #tan_content{background-color: white;padding:45px 30px;text-align: center;font-size: 25px;line-height: 40px;}
+  #tan_footer{border:none;border-top: solid #c9c9c9 1px;height: 80px;background-color: white; line-height: 80px;text-align: center;font-size: 28px;color: red;display: block; width: 100%;border-radius: 0;}
+  /*微信引导分享*/
+  #share_img{position: fixed;left: 0;top: 0;z-index: 9999;width: 100%;height: 100%;display: none;}
+  #share_img img{width: 100%;}
+</style>
+<style>
+  *{ margin: 0; padding: 0; list-style: none;}
+  html{ font-size: 20px;}
+  .wrap{width: 750px; height: 1218px; position: relative;margin:0 auto; background: black url(http://i1.yongche.name/media/g1/M01/1C/24/rBEARFdVFy-IGZ_5AAGiSn8NVkAAALNlQCQ8k8AAaJi395.jpg) no-repeat;}
+  input[type="submit"], input[type="reset"], input[type="button"], button { -webkit-appearance: none; /*去掉苹果的默认UI来渲染按钮*/}
+  ::-webkit-input-placeholder { /* WebKit browsers */color: #ff9c5a;}
+</style>
+<style>
+  #appointment{ position: absolute; top: 951px;  height: 90px;width:330px; left: 50%; margin-left: -165px; border:solid red 1px; }
+  #rules{position: absolute; top: 1120px; height: 45px; width: 200px; left: 50%; margin-left: -100px; background: none; border:none;border:solid red 1px;}
+  #mask{position: absolute; left: 50%; margin-left: -252px; top: 280px; width: 504px; height: 663px; background:url(http://i1.yongche.name/media/g1/M02/1C/24/rBEAQ1dVFy6IHix7AACusvml05IAALNlgBID7QAAK7K204.png); display: none;}
+</style>
+</head>
+<!-- <script src="http://i2.yongche.name/u/js/201606/zepto.min.js?1464318200"></script> -->
+<script src="http://i2.yongche.name/js/jquery/jquery-1.8.3.min.js?1456255560"></script>
+<script src="http://i3.yongche.name/js/app/i/weixin/js-api.min.js?1456686600"></script>
+<body>
+<img id="shareImg" src="" style="position:fixed;left:-100%;" />
+<div id="share_img"><!-- 微信引导分享 -->
+  <img src="http://i1.yongche.name/media/g1/M03/13/0A/rBEARFcN_fSITIK_AACTNRJ5FnsAAHiSwP8nJEAAJNN439.png">
+</div>
+<!-- 弹窗模板 -->
+<div id="tan" style="display: none;">
+  <div id="tan_mask"></div>
+  <div id="tanchuang">
+    <div id="tan_header"></div>
+    <ul id="tan_content">
+      <li>恭喜您领取成功</li>
+      <li>您已领取红包，请到账户中查询</li>
+      <li><a href="http://m.yongche.com">下载易到app，登录账户</a></li>
+    </ul>
+    <input type="button" id="tan_footer" value="确定">
+  </div>
+</div>
+<div class="wrap">
+  <a href="javascript:;" id="appointment"></a>
+  <input type="button" id="rules">
+  <div id="mask">
+    <div id="m_close" style="position: absolute; left: 50%; margin-left: -135px; top: 542px; height: 75px; width:270px;border:none;border:solid red 1px;"></div>
+  </div>
+</div>
+<iframe frameborder="0" style="display: none;" id="share_iframe"></iframe>
+<script>// reset弹窗
+  window.alert = function(msg){
+    $("#tan_content").html(msg);
+    $("#tan").show();
+    $("#tanchuang").css('marginTop', -$("#tanchuang").height()/2);
+  }
+  $("#tan_footer").bind("touchend",function(){
+    $("#tan").hide();
+  })
+  $("#tan").bind("touchmove",function(){
+    return false;
+  })
+</script>
+<script>
+  var sWX = {
+    shareImg:"http://i2.yongche.name/media/g1/M03/1C/25/rBEARFdVKa6IIrqAAAA5QDdnHWAAALN5gOWryMAADlY497.jpg",
+    shareTitle:"易到超级六月，充1分得50！",
+    shareContent:"限量体验，充值即得！#优惠#不止如此~"
+  }
+  window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function(){
+    detectOrientation();
+  })
+  function detectOrientation(){
+    if(window.orientation === 180 || window.orientation ===0){
+      alert('为了更好的体验，请将手机/平板竖过来！');
+    };
+    if(window.orientation === 90 || window.orientation === -90){
+      console.log('竖屏状态');
+    };
+  }
+</script>
+<script>
+  var guideShare = document.getElementById("share");
+  if(guideShare){
+    guideShare.addEventListener("touchstart",function(ev){
+      guideShare.addEventListener('touchmove',function(){
+        return false;
+      })
+      document.getElementById("share_img").style.display = "block";
+      ev.cancelBubble = true;
+      ev.preventDefault();
+    })
+
+    document.getElementById("share_img").addEventListener("touchend",function(ev){
+      document.getElementById("share_img").style.display = "none";
+      ev.cancelBubble = true;
+      ev.preventDefault();
+    })
+    document.getElementById("share_img").addEventListener("touchmove",function(){
+      return false;
+    })
+  }
+</script>
+<script>//充返判断登陆
+    var u = window.navigator.userAgent;
+    var isLogin = '<?=$isLogin?>';
+    var can_jump_to_rebate = '<?=$can_jump_to_rebate?>';
+    $("#appointment").click(function(){
+        //判断app内是否登录
+        if(u.indexOf("YongChe")> -1){
+            //app内
+            if(!isLogin){
+              alert("您尚未登录，请登录后再充值")
+              window.location.href = "yongche://login";
+              return false;
+          }
+          if(can_jump_to_rebate){
+              window.location.href = "https://pay.yongche.com/touch/rechargerebate/index"
+          }else{
+              alert("此版本不支持充值返现，立刻更新新版参与")
+          }
+        }else{
+          window.location.href = "http://m.yongche.com"
+        }
+    });
+
+
+
+    $("#rules").click(function(){
+      $("#mask").show();
+    })
+    $("#m_close").click(function(){
+      $("#mask").hide();
+    })
+</script>
+<script>
+(function () {//分享
+  var shareImg = sWX.shareImg;
+  var shareTitle = sWX.shareTitle;
+  var shareContent = sWX.shareContent;
+
+
+  document.getElementById("shareImg").src = shareImg;
+    // 分享变量设置
+  var _protocolLinkBase = "yongche://share?";
+  var _protocolLinkFriend = "yongche://shareToFriend?";
+  var _protocolLinkTimeline = "yongche://shareToTimeline?";
+  var shareRead_link = encodeURIComponent(location.href);// 分享地址
+  var shareRead_pics = encodeURIComponent(shareImg);// 分享的图片
+  var shareRead_title = encodeURIComponent(shareTitle);// 分享的标题
+  var shareRead_content = encodeURIComponent(shareContent);// 分享的内容
+  var shareRead_sourceType = 42;
+
+  var Tools = {
+    shareThisPageToFriend:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkFriend + _str;
+        window.location.href = _tmpOpenLink;
+    },
+    shareThisPageToTimeline:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkTimeline + _str;
+        window.location.href = _tmpOpenLink;
+    },
+    shareBase:function(){
+        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
+        var _tmpOpenLink = _protocolLinkBase + _str;
+        window.location.href = _tmpOpenLink;
+    }
+  };
+  var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&from=iframe";
+  var _tmpOpenLink = _protocolLinkBase + _str;
+
+  if (navigator.userAgent.indexOf('YongChe') != -1) {
+    document.getElementById("share_iframe").src = _tmpOpenLink;
+  }
+
+
+  var shareData = {
+                "title": sWX.shareTitle,
+                "desc": shareContent,
+                "imgUrl" : shareImg ,
+                "link" : window.location.href
+            };
+  var wxConfig = [];
+  wxConfig = <?= $js_data ? json_encode($js_data) : '[]';?>;
+  var callback = {};
+  var c =  new WxJsApi(wxConfig,shareData,callback);
+  c.init();
+})()
+</script> 
+</body>
+</html>

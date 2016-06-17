@@ -1,7 +1,18 @@
 <script>
+	$("#cellPhone").on("input",function(){
+	  var len=$(this).val().length;
+	  if(len==11){
+	    lingquan($(this).val());
+	    $("#cellPhone").blur();
+	  }
+	});
+
+
+	
 	$("#lingquan").bind("touchstart",function(){
 		function lingquanEnd(){
 			lingquan($("#cellPhone").val())
+			$("#cellPhone").blur()
 			$("#lingquan").unbind('touchend',lingquanEnd);
 		}
 		function lingquan(phone){
