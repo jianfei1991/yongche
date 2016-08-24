@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="screen-orientation" content="portrait">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta -equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="format-detection" content="telephone=no">
+	<title>imgH5</title>
+	<style>
+		 * { padding:0; margin:0;}
+		  body { font-size:12px; font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei" width:100%; overflow-x:hidden;}
+		  a { color:#fff; text-decoration:none; outline:none;}
+		  a:hover　{ outline:none;}
+		  li { list-style-type:none;}
+		  h1 , h2 { font-weight:normal;}
+		  font { font-family:"Tahoma"}
+		  body { background:#f0f0f0; background-size:100% auto;}
+
+		  .page{
+		  	width: 100%;
+		  	height: auto;
+		  	background: #efefef;
+		  	padding-top: 4%;
+		  	padding-left: 4%;
+		  	padding-right: 4%;
+		  	box-sizing: border-box;
+		  }
+
+		  .page .img{
+		  	width: 100%;
+		  	margin-bottom: 2%;
+		  	border: 1px solid #e1e1e1;
+		  	border-radius: 10px;
+		  }
+	</style>
+	
+
+
+</head>
+<body>
+	<section class="page">
+		<ul>
+			<li id="li1">
+				<a>
+					<img class="img" src="<{asset:media/g2/M03/08/20/rBEBJVe6hvmIb8IDAADpGqrqArEAADURANgMosAAOky863.jpg}>" alt="">
+				</a>
+			</li>
+			<li id="li7" style="display:none;">
+				<a>
+					<img class="img" src="<{asset:media/g2/M01/08/10/rBEBP1e3Ge6IVSaeAAFF5cDcDmYAADORwFogU0AAUX9382.jpg}>" alt="">
+				</a>
+			</li>
+
+
+			
+
+			<li id="li8">
+				<a>
+					<img class="img" src="<{asset:media/g2/M02/08/11/rBEBP1e3LMiIAcYKAAC54R4NHTAAADOZgPZWLoAALn5336.jpg}>" alt="">
+				</a>
+			</li>
+
+			
+			<li id="li3">
+				<a>
+					<img class="img" src="<{asset:media/g2/M04/08/23/rBEBP1e63JqIVz_rAACvomqomMIAADVcgNmrHwAAK-6046.jpg}>" alt="">
+				</a>
+			</li>
+			
+			<li id="li4">
+				<a>
+					<img class="img" src="<{asset:media/g2/M02/03/03/rBEBJVd_Bf6IHBPlAADrDP9BS40AABMOQPu8bgAAOsk089.png}>" alt="">
+				</a>
+			</li>
+
+			<li id="li5">
+				<a>
+					<img class="img" src="<{asset:media/g2/M03/08/10/rBEBJVe3GQ2IBPm2AAFbQTnn6w0AADORQG6y9AAAVtZ979.png}>" alt="">
+				</a>
+			</li>
+
+			 <li id="li6">
+				<a>
+					<img class="img" src="<{asset:media/g2/M03/07/03/rBEBP1epR8-IK9wqAAFOp6M4XzkAACv7gOz6coAAU6_604.jpg}>" alt="">
+				</a>
+			</li>
+		</ul>
+	</section>
+
+
+<script src="<{asset:js/do/do.all.js}>"></script>
+   <script type="text/javascript">
+     Do(function(){
+     	console.log('do')
+       //当前时间
+       var date1 = new Date();
+       //设置开始GMT+8:00时间 2016年6月2日16:30:00  -  new Date(Date.UTC(2016, 5, 2, 8, 30, 0))
+       /*var date2 = new Date(Date.UTC(2016, 6, 15, 15, 59, 59));*/
+
+       var date3 = new Date(Date.UTC(2016, 7, 23, 15, 59, 59));
+       var date4 = new Date(Date.UTC(2016, 7, 21, 15, 59, 59));
+	   var date5 = new Date(Date.UTC(2016, 7, 24, 15, 59, 59));
+	   var date6 = new Date(Date.UTC(2016, 7, 07, 15, 59, 59));
+	   var date7 = new Date(Date.UTC(2016, 7, 08, 15, 59, 59));
+
+
+	   var date8e = new Date(Date.UTC(2016, 7, 20, 15, 59, 59));
+	   var date11e = new Date(Date.UTC(2016, 7, 23, 15, 59, 59));
+
+        if(date1 >= date11e){
+            $("#li1").hide();
+            console.log('li1 hide')
+        }
+
+	    if(date1>=date8e){
+	   		$("#li8").hide();
+	   		console.log('li8 hide')
+	    }
+
+        if(date1 >= date3 ) {
+       		$('#li1').hide();
+        }
+
+        if(date1 >= date4 ) {
+       		$('#li7').show();
+        }
+
+        if(date1 >= date5 ) {
+       		$('#li7').hide();
+        }
+
+        if(date1 >= date6 ) {
+       		$('#li6').hide();
+        }
+
+        if(date1 >= date7 ) {
+       		$('#li6').show();
+        }
+
+       var data1 = encodeURIComponent("http://www.yongche.com/cms/page/2016/08/22072638.html?source=6");
+       var data2 = encodeURIComponent("http://www.yongche.com/cms/page/rebate2_index.html");
+       var data3 = encodeURIComponent("http://t.cn/Rt196nI");
+       var data4 = encodeURIComponent("http://t.cn/RGrvF9B");
+       var data5 = encodeURIComponent("http://t.cn/RtHZsFO");
+       var data6 = encodeURIComponent("http://t.cn/RtSz4gA");
+       var data7 = encodeURIComponent("http://www.yongche.com/cms/page/2016/08/19141429.html");
+       var data8 = encodeURIComponent("http://www.yongche.com/cms/page/2016/08/19212505.html?source=3");
+
+       $("#li1 a").attr("href","yongche://imActivity?link="+data1);
+       $("#li2 a").attr("href","yongche://imActivity?link="+data2);
+       $("#li3 a").attr("href","yongche://imActivity?link="+data3);
+       $("#li4 a").attr("href","yongche://imActivity?link="+data4);
+       $("#li5 a").attr("href","yongche://imActivity?link="+data5);
+       $("#li6 a").attr("href","yongche://imActivity?link="+data6);
+       $("#li7 a").attr("href","yongche://imActivity?link="+data7);
+       $("#li8 a").attr("href","yongche://imActivity?link="+data8);
+// 预约
+var buylater = "<{asset:media/g2/M04/08/23/rBEBP1e63JqIVz_rAACvomqomMIAADVcgNmrHwAAK-6046.jpg}>"
+
+// 立即购买
+var buynow = "<{asset:media/g2/M04/08/23/rBEBP1e63JqIaGyYAACozBoOCggAADVcgNnXDYAAKjk014.jpg}>"
+		var date3d = new Date(Date.UTC(2016, 7, 24, 1, 30, 00));
+		var date3e = new Date(Date.UTC(2016, 7, 24, 10, 00, 00));
+		var date3ee = new Date(Date.UTC(2016, 7, 31, 15, 59, 59));
+		if(date1>date3d&&date1<date3e) {
+			$("#li3 a img").attr('src',buynow)
+		} else if (date1>date3d&&date1>date3e&&date1<date3ee){
+			$("#li3 a img").attr('src',buylater)
+		} else if (date1>date3ee) {
+			$("#li3").hide()
+		}
+        var str =window.navigator.userAgent;
+        if(str.indexOf("YongChe/") != -1){
+	    	var app_version = str.split('YongChe/')[1].substr(0,5).replace(/\./g,'');
+	    	if((window.navigator.userAgent.indexOf('Android') != -1) && app_version >= 706){
+	       		var data3 = encodeURIComponent("http://t.cn/RtqRjqi");
+	       		$("#li3 a").attr("href","yongche://leMall?link="+data3);
+	       	}else{
+	       		var data3 = encodeURIComponent("http://t.cn/RtqRjqi");
+	       		$("#li3 a").attr("href","yongche://imActivity?link="+data3);
+	       	}
+        }
+     })
+   </script> 
+<!-- GA: -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-18761483-4', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+ 
+<!-- 百度统计： -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?24b50d3a9a73a0efd25feab8f04d313f";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>
