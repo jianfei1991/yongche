@@ -5,12 +5,8 @@
     $js_data = YC_Util::getWeixinSignature($url);  
 ?>
 
-
-
-
 <script src="<{asset:js/jquery/jquery-1.8.3.min.js}>"></script>
 <script src="<?=$a['js/app/i/weixin/js-api.min.js']?>"></script>
-
 
 
 
@@ -23,13 +19,15 @@
 
 
 (function () {//分享
-  var shareImg = "";
-  var shareTitle = "";//主标题
-  var timeStr = "";//副标题
+  var shareImg = "";//分享图
+  var shareTitle = "主标题";//主标题
+  var timeStr = "副标题";//副标题
 
   document.title = shareTitle;
   document.getElementById("shareImg").src = shareImg;
-    // 分享变量设置
+
+
+  /**start of 端内分享**/
   var _protocolLinkBase = "yongche://share?";
   var _protocolLinkFriend = "yongche://shareToFriend?";
   var _protocolLinkTimeline = "yongche://shareToTimeline?";
@@ -40,38 +38,36 @@
   var shareRead_sourceType = 42;
 
   var Tools = {
+    str:"link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType,
     shareThisPageToFriend:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkFriend + _str;
+        var _tmpOpenLink = _protocolLinkFriend + this.str;
         window.location.href = _tmpOpenLink;
     },
     shareThisPageToTimeline:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkTimeline + _str;
+        var _tmpOpenLink = _protocolLinkTimeline + this.str;
         window.location.href = _tmpOpenLink;
     },
     shareBase:function(){
-        var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType;
-        var _tmpOpenLink = _protocolLinkBase + _str;
+        var _tmpOpenLink = _protocolLinkBase + this.str;
         window.location.href = _tmpOpenLink;
     }
   };
-  var _str = "link="+shareRead_link+"&pics="+shareRead_pics+"&title="+shareRead_title+"&content="+shareRead_content+"&sourceType="+shareRead_sourceType+"&from=iframe";
+  var _str = Tools.str+"&from=iframe";
   var _tmpOpenLink = _protocolLinkBase + _str;
   if (navigator.userAgent.indexOf('YongChe') != -1) {
-    document.getElementById("share_iframe").src = _tmpOpenLink;
+    document.getElementById("share_iframe").src = _tmpOpenLink;//防止端外通过协议不断打开易到APP
   }
+  /**end of 端内分享**/
 
 
 
-
-  var shareData =
-            {
-                "title": document.title,
-                "desc": timeStr,
-                "imgUrl" : shareImg,
-                "link" : window.location.href
-            };
+  /**start of 二次分享**/
+  var shareData ={
+      "title": shareTitle,
+      "desc": timeStr,
+      "imgUrl" : shareImg,
+      "link" : window.location.href
+  };
   var wxConfig = [];
   wxConfig = <?= $js_data ? json_encode($js_data) : '[]';?>;
   var callback = {};
